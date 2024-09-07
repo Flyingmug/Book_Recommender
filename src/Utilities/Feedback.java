@@ -1,6 +1,4 @@
-package view;
-
-import Utilities.ColoriConsole;
+package Utilities;
 
 public class Feedback {
 

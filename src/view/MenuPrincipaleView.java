@@ -4,7 +4,7 @@ import Utilities.ColoriConsole;
 
 import java.util.Scanner;
 
-public class MenuPrincipale {
+public class MenuPrincipaleView {
 
     final static String cy = ColoriConsole.CYAN;
     final static String rs = ColoriConsole.RESET;

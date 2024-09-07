@@ -18,6 +18,8 @@ public class Libro {
   public String getTitolo() { return titolo; }
   public String getAutori() { return autori; }
   public int getAnnoPubblicazione() { return annoPubblicazione; }
+  public String getEditore() { return editore; }
+  public String getCategorie() { return categorie; }
 
   /*public String getAutoriString() {
     String s = "";

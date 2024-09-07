@@ -1,14 +1,12 @@
 package controller;
 
 import Utilities.Utils;
-import model.CriterioRicerca;
-import model.Libro;
-import model.RaccoltaLibri;
-import model.Utente;
-import view.Feedback;
-import view.MenuCriterioRicerca;
-import view.MenuPaginamentoRisultati;
-import view.MenuPrincipale;
+import model.*;
+import Utilities.Feedback;
+import view.DisplayLibroView;
+import view.MenuCriterioRicercaView;
+import view.MenuPaginamentoRisultatiView;
+import view.MenuPrincipaleView;
 
 import java.util.List;
 import java.util.Scanner;
@@ -39,7 +37,7 @@ public class GestoreRaccolta {
     do {
 
       // DISPLAY deve avere nella descrizione del funzionamento indicata la restituzione della scelta fatta dall'utente
-      scelta = MenuPrincipale.display();
+      scelta = MenuPrincipaleView.display();
 
       // aggiungere controllo dell'input
 
@@ -77,7 +75,7 @@ public class GestoreRaccolta {
 
 
   void iniziaRicerca() {
-    MenuCriterioRicerca.display();
+    MenuCriterioRicercaView.display();
 
     /* acquisizione chiavi e selezione del criterio di ricerca */
     String titolo = "", autori= "";
@@ -115,12 +113,12 @@ public class GestoreRaccolta {
     RaccoltaLibri risultati = new RaccoltaLibri(raccolta.cercaLibro(titolo, autori, annoPubblicazione, criterio));
 
     // visualizzazione pagine dei risultati
-    iniziaPaginaRisultati(risultati, criterio);
+    iniziaPaginazioneRisultati(risultati, criterio);
   }
 
 
 
-  void iniziaPaginaRisultati(RaccoltaLibri risultati, CriterioRicerca criterio) {
+  void iniziaPaginazioneRisultati(RaccoltaLibri risultati, CriterioRicerca criterio) {
     String sceltaOpzionePagina;
     boolean uscitaPaginaRisultati = false;
     int indicePaginaCorrente = 0;
@@ -130,9 +128,9 @@ public class GestoreRaccolta {
     do {
       List<Libro> paginaRisultati = raccolta.sottoRaccolta(risultati.getElenco(), indicePaginaCorrente*DIM_PAGINA, DIM_PAGINA);
 
-      sceltaOpzionePagina = MenuPaginamentoRisultati.display(paginaRisultati, indicePaginaCorrente, numOccorrenze, numeroPagine, DIM_PAGINA, criterio);
+      sceltaOpzionePagina = MenuPaginamentoRisultatiView.display(paginaRisultati, indicePaginaCorrente, numOccorrenze, numeroPagine, DIM_PAGINA, criterio);
 
-      if(!Utils.isInteger(sceltaOpzionePagina)) {
+
         // verifica opzione selezionata
         switch (sceltaOpzionePagina.toLowerCase()) {
           case "a":
@@ -143,7 +141,7 @@ public class GestoreRaccolta {
             break;
           case "p":
             // displayPageSelectionInput DEVE avere nella descrizione del funzionamento indicata la restituzione della scelta fatta dall'utente
-            String pSel = MenuPaginamentoRisultati.displayPageSelectionInput();
+            String pSel = MenuPaginamentoRisultatiView.displayPageSelectionInput();
 
             if (Utils.isInteger(pSel)) {
               int numPaginaSel = Integer.parseInt(pSel);
@@ -153,25 +151,44 @@ public class GestoreRaccolta {
                 Feedback.warn("Pagina inesistente");
             } else
               Feedback.warn("Solo numeri interi ammessi");
-
             break;
+
           case "e":
             uscitaPaginaRisultati = true;
+
           default:
-            Feedback.warn("Operazione inesistente");
+            if (Utils.isInteger(sceltaOpzionePagina)) {
+              // visualizzazione dati di un libro
+              int indice = Integer.parseInt(sceltaOpzionePagina);
+              if (indice > 0 && indice <= numOccorrenze) {
+                visualizzaLibro(risultati.getElenco().get(indice));
+              } else
+                Feedback.warn("Indice selezionato non valido");
+            } else
+              Feedback.warn("Operazione inesistente");
+
             break;
         }
-      } else {
 
-        // visualizzazione dati di un libro
-        int indice = Integer.parseInt(sceltaOpzionePagina);
-
-        /*unfinished*/
-        /*unfinished*/
-        /*unfinished*/
-
-      }
     } while (!uscitaPaginaRisultati);
+  }
+
+
+  void visualizzaLibro(Libro l) {
+
+    Valutazione valMedia = raccolta.ottieniValutazioneMediaLibro(l);
+
+    boolean uscitaPaginaLibro = false;
+    do {
+
+      String scelta = DisplayLibroView.display(l, valMedia);
+      if (scelta.equalsIgnoreCase("c")) {
+
+      } else {
+        uscitaPaginaLibro = true;
+      }
+
+    } while(!uscitaPaginaLibro);
   }
 
 
@@ -186,26 +203,6 @@ public class GestoreRaccolta {
 
     System.out.println("\n\t╠═══════ Registrazione ═══════╣\n\n");
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
