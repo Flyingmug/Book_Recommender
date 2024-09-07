@@ -1,3 +1,5 @@
+package Utilities;
+
 public class ColoriConsole {
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset
