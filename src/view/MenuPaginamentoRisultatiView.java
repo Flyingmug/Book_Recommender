@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class MenuPaginamentoRisultati {
+public class MenuPaginamentoRisultatiView {
 
     final static String rs = ColoriConsole.RESET;
     final static String gr = ColoriConsole.GREEN;

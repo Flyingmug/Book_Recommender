@@ -2,7 +2,7 @@ package view;
 
 import Utilities.ColoriConsole;
 
-public class MenuCriterioRicerca {
+public class MenuCriterioRicercaView {
 
     final static String cy = ColoriConsole.CYAN;
     final static String rs = ColoriConsole.RESET;
