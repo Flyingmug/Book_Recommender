@@ -1,6 +1,8 @@
 <component name="libraryTable">
-  <library name="commons-codec-1.17.1">
+  <library name="lib">
     <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.16.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-csv-1.11.0.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/commons-codec-1.17.1.jar!/" />
     </CLASSES>
     <JAVADOC />

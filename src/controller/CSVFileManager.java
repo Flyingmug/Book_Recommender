@@ -1,3 +1,6 @@
+package controller;
+
+import model.Libro;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -23,7 +26,8 @@ public class CSVFileManager {
 
       CSVParser csvParser = new CSVParser(reader, csvFormat);
 
-      for(CSVRecord record: csvParser) {
+      for (CSVRecord record: csvParser) {
+
         String titolo = record.get("Title");
         String autori = record.get("Authors");
         int annoPubblicazione = Integer.parseInt(record.get("Publish Date (Year)"));
@@ -40,6 +44,10 @@ public class CSVFileManager {
 
     return elenco;
   }
+
+  /*public static <T> T leggiRighe(String key, String recordHeaderName) {
+
+  }*/
 
   public static void scriviFile(Object obj) {
 
