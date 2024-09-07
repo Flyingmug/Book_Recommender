@@ -1,7 +1,5 @@
 package model;
 
-import view.DisplayLibroView;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -14,17 +12,19 @@ public class RaccoltaLibri {
   public RaccoltaLibri() {
     elenco = new LinkedList<>();
     valutazioni = new LinkedList<>();
-    /*temporaneo, fino al funzionamento della lettura/scrittura su/da file*/
-    valutazioni.add(new Valutazione(1, 1, 1, 1, 1));
-    valutazioni.add(new Valutazione(5, 5, 5, 5, 5));
   }
+
 
   public RaccoltaLibri(List<Libro> elenco) {
     this.elenco = elenco;
   }
 
   public List<Libro> getElenco() { return elenco; }
-  public void setElenco(LinkedList<Libro> e) { elenco = e; }
+
+  public void caricaElenco(String filename) {
+    elenco = CSVFileManager.leggiDatiCsv("./data/Libri.dati.csv", Libro.class);
+    valutazioni = CSVFileManager.leggiDatiCsv("./data/ValutazioniLibri.dati.csv", Valutazione.class);
+  }
 
   public List<Libro> cercaLibro(String titolo, String autori, int annoPubblicazione, CriterioRicerca criterio) {
 
@@ -64,6 +64,7 @@ public class RaccoltaLibri {
 
   public Valutazione ottieniValutazioneMediaLibro(Libro l) {
 
+    /*la valutazione media qui funziona solo con la media di tutte le valutazioni?*/
     Valutazione valMedia = new Valutazione();
     valMedia.setStile(calcolaMediaValutazione(valutazioni, Valutazione::getStile));
     valMedia.setContenuto(calcolaMediaValutazione(valutazioni, Valutazione::getContenuto));

@@ -22,7 +22,8 @@ public class GestoreRaccolta {
     // temporary path selection
     /*System.out.println("\n\n\n||||Directory:|||| " + System.getProperty("user.dir") + "\n");*/
     this.raccolta = raccolta;
-    raccolta.setElenco(CSVFileManager.leggiFile("./data/Libri.dati.csv"));
+    raccolta.caricaElenco("./data/Libri.dati.csv");
+    /*raccolta.setElenco(CSVFileManager.leggiFile("./data/Libri.dati.csv"));*/
     scanner = new Scanner(System.in);
   }
 
