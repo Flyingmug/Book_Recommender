@@ -1,7 +1,10 @@
 package model;
 
 import Utilities.Feedback;
-import org.apache.commons.csv.*;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,7 +20,7 @@ public class CSVFileManager {
     List<T> recordsList = new LinkedList<>();
 
     CSVFormat csvFormat = CSVFormat.Builder.create()
-        .setHeader(getHeaders(classe))
+        .setHeader()
         .setSkipHeaderRecord(true)
         .build();
 
@@ -59,8 +62,7 @@ public class CSVFileManager {
 
       }
     } catch (IOException | RuntimeException e) {
-      Feedback.err(e.getMessage());
-      e.getStackTrace();
+      Feedback.err(e.getMessage() + " " + e.getStackTrace());
     }
     return recordsList;
   }
@@ -69,12 +71,10 @@ public class CSVFileManager {
 
   /* Scrittura */
 
-  // Metodo generico per scrivere dati in un file CSV
+  // Generic method to write data to a CSV file
   public static <T> void scriviDatiCsv(String filePath, List<T> recordsList, boolean appendMode) {
-
-    // Definizione formato CSV
+    // Define CSV format
     CSVFormat csvFormat = CSVFormat.Builder.create()
-        .setSkipHeaderRecord(true)
         .setHeader(getHeaders(recordsList.getFirst()))
         .build();
 
@@ -82,8 +82,7 @@ public class CSVFileManager {
          CSVPrinter csvPrinter = new CSVPrinter(writer, csvFormat)) {
 
       for (T record : recordsList) {
-        Iterable<?> i = convertToCsvRecord(record);
-        csvPrinter.printRecord(i);
+        csvPrinter.printRecord(convertToCsvRecord(record));
       }
 
       csvPrinter.flush();
@@ -92,7 +91,7 @@ public class CSVFileManager {
     }
   }
 
-  // Metodo per ottenere gli header corrispondenti alla classe usata
+  // Method to get the headers for the CSV file based on the class type
   private static String[] getHeaders(Object record) {
     if (record instanceof Utente) {
       return new String[]{"Nome", "Cognome", "Codice Fiscale", "Email", "Userid", "Password"};
@@ -104,11 +103,11 @@ public class CSVFileManager {
     return new String[0];
   }
 
-  // Metodo per convertire ogni oggetto in un record csv
+  // Method to convert each object to a CSV record
   private static Iterable<?> convertToCsvRecord(Object record) {
     if (record instanceof Utente) {
       Utente user = (Utente) record;
-      return List.of(user.getNome(), user.getCognome(), user.getCodiceFiscale(), user.getEmail(), user.getUserId(), user.getPassword());
+      return List.of(user.getNome(), user.getCognome(), user.getEmail(), user.getUserId(), user.getPassword());
     } else if (record instanceof Libro) {
       Libro lib = (Libro) record;
       return List.of(lib.getTitolo(), lib.getAutori(), lib.getAnnoPubblicazione(), lib.getEditore(), lib.getCategorie());
@@ -117,7 +116,7 @@ public class CSVFileManager {
       return List.of(rating.getStile(), rating.getContenuto(), rating.getGradevolezza(),
           rating.getOriginalita(), rating.getEdizione());
     }
-    return List.of(); // Ritorna una lista vuota se l'oggetto non è riconosciuto
+    return List.of(); // Return an empty list if the object type is not recognized
   }
 }
 
