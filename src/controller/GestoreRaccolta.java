@@ -4,10 +4,12 @@ import Utilities.Utils;
 import model.*;
 import Utilities.Feedback;
 import view.*;
-
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * La classe GestoreRaccolta viene utilizzata per avviare il programma e presentare il menu' con le funzionalita' all'utente
+ * */
 public class GestoreRaccolta {
 
   final String path_libri = "./data/Libri.dati.csv";
@@ -21,6 +23,9 @@ public class GestoreRaccolta {
   Scanner scanner;
   final int DIM_PAGINA = 15;
 
+  /**
+   * Costruttore GestoreRaccolta
+   * @param raccolta RaccoltaLibri */
   public GestoreRaccolta(RaccoltaLibri raccolta) {
     this.raccolta = raccolta;
     sessione = new GestoreSessione(path_utenti_registrati);
@@ -28,7 +33,9 @@ public class GestoreRaccolta {
     scanner = new Scanner(System.in);
   }
 
-
+/**
+ * Metodo che riceve in input l'operazione desiderata dall'utente.
+ * Richiama il metodo che gestisce l'operazione corrispondente.*/
   public void iniziaCicloPrincipale() {
     // costanti -> NOTA: la dimensione deve essere maggiore di 0
 
@@ -78,7 +85,12 @@ public class GestoreRaccolta {
   }
 
 
-
+/**
+* Metodo utilizzato per ricercare il libro richiesto dall'utente, in base ai vari criteri quali:
+* Titolo
+* Autore
+* Autore e anno
+ * */
   void iniziaRicerca() {
     MenuCriterioRicercaView.display();
 
@@ -122,7 +134,10 @@ public class GestoreRaccolta {
   }
 
 
-
+/**
+ * Metodo che mostra i risultati di ricerca (libri) sotto forma di pagine tra cui scorrere
+ * @param risultati RaccoltaLibri
+ * @param criterio CriterioRicerca */
   void iniziaPaginazioneRisultati(RaccoltaLibri risultati, CriterioRicerca criterio) {
     String sceltaOpzionePagina;
     boolean uscitaPaginaRisultati = false;
@@ -178,7 +193,9 @@ public class GestoreRaccolta {
     } while (!uscitaPaginaRisultati);
   }
 
-
+/**
+ * Metodo utilizzato per stampare a video il/i libro/i richiesto (tramite classe DisplayLibroView)
+ * @param l Libro*/
   void visualizzaLibro(Libro l) {
 
     Valutazione valMedia = raccolta.ottieniValutazioneMediaLibro(l);
@@ -197,7 +214,8 @@ public class GestoreRaccolta {
   }
 
 
-
+/**
+ * */
   void iniziaRegistrazione() {
     System.out.println("\n\t╠═══════ Registrazione ═══════╣\n\n");
 
@@ -208,7 +226,6 @@ public class GestoreRaccolta {
         sessione.Registra(u);
       } catch (RuntimeException e) {
         Feedback.err(e.getMessage());
-        e.printStackTrace();
       } finally {
         Feedback.success("Registrazione avvenuta con successo");
       }
@@ -216,7 +233,8 @@ public class GestoreRaccolta {
   }
 
 
-
+/**
+ * Semplice stampa a video per indicare la selezione dell'operazione di "login"*/
   void iniziaLogin() {
     Utente u = MenuLoginView.display();
     sessione.Accedi(u.getUserId(), u.getPassword());

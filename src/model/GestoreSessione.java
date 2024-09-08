@@ -3,15 +3,27 @@ package model;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Offre dei metodi per potersi autenticare, e utilizza CSVFileManager per salvare i dati.
+ * L'utente attuale è ottenibile tramite getUtenteCorrente()
+ * @author Selimi Sebian*/
+
 public class GestoreSessione {
 
   String filePathUtenti;
   Utente utenteCorrente;
 
+  /**
+   * Costruttore classe.
+   * FilePathUtenti è una stringa contenente il percorso del file su cui risiedono i dati degli utenti.
+   * @param filePathUtenti String*/
   public GestoreSessione (String filePathUtenti) {
     this.filePathUtenti = filePathUtenti;
   }
 
+  /**
+   *
+   * @return utenteCorrente */
   public Utente getUtenteCorrente() {
     return utenteCorrente;
   }
