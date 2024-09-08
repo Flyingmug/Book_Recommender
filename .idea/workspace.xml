@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="lettura file" />
+    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="Aggiunta commenti" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,12 +27,12 @@
     &quot;assignee&quot;: &quot;Moscatettole&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Flyingmug/Book_Recommender.git&quot;,
-    &quot;accountId&quot;: &quot;c9e15266-5b2a-4b27-a841-8ab8936592a5&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Flyingmug/Book_Recommender.git",
+    "accountId": "8904bd80-af6b-4d7f-80b2-e4debf57fe11"
   }
-}</component>
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/view/MenuCriterioRicercaView.java" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -106,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725829658717</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Aggiunta commenti">
+      <option name="closed" value="true" />
+      <created>1725829932229</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1725829932229</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -124,6 +132,7 @@
     <MESSAGE value="small fixes" />
     <MESSAGE value="fixed ClassCastException in &quot;iniziaRicerca(...)&quot; from type casting" />
     <MESSAGE value="lettura file" />
-    <option name="LAST_COMMIT_MESSAGE" value="lettura file" />
+    <MESSAGE value="Aggiunta commenti" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta commenti" />
   </component>
 </project>
