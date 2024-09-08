@@ -7,9 +7,7 @@ public class Feedback {
   final static String gb = ColoriConsole.GREEN_BOLD;
   final static String rs = ColoriConsole.RESET;
 
-  public static void warn(String msg) {
-    System.out.println(yb + "!! " + msg + " !!" + rs);
-  }
+  public static void warn(String msg) { System.out.println(yb + "!! " + msg + " !!" + rs); }
 
   public static void err(String msg) { System.out.println(rb + msg + rs); }
 

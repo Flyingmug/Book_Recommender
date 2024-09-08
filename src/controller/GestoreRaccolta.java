@@ -203,6 +203,7 @@ public class GestoreRaccolta {
         sessione.Registra(u);
       } catch (RuntimeException e) {
         Feedback.err(e.getMessage());
+        e.printStackTrace();
       } finally {
         Feedback.success("Registrazione avvenuta con successo");
       }
