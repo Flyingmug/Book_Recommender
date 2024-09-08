@@ -31,7 +31,7 @@ public class GestoreSessione {
       throw new UserIdUnavailableException("L'id utente scelto è già presente");
     else {
       List<Utente> userList = new LinkedList<>();
-      userList.add(utenteRis);
+      userList.add(u);
       CSVFileManager.scriviDatiCsv(filePathUtenti, userList, true);
       utenteCorrente = u;
     }
