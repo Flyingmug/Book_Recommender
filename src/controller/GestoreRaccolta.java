@@ -39,7 +39,9 @@ public class GestoreRaccolta {
     do {
 
       // DISPLAY deve avere nella descrizione del funzionamento indicata la restituzione della scelta fatta dall'utente
-      scelta = MenuPrincipaleView.display();
+      scelta = sessione.getUtenteCorrente() != null ?
+          MenuPrincipaleView.displayFull() :
+          MenuPrincipaleView.displayMinimal();
 
       // aggiungere controllo dell'input
 
@@ -48,7 +50,10 @@ public class GestoreRaccolta {
           iniziaRicerca();
           break;
         case "r":
-          iniziaRegistrazione();
+          if (sessione.getUtenteCorrente() != null)
+            iniziaRegistrazione();
+          else
+            Feedback.warn("");
           break;
         case "l":
           iniziaLogin();
@@ -213,7 +218,12 @@ public class GestoreRaccolta {
 
 
   void iniziaLogin() {
-    System.out.println("\n\t╠═══════ Login ═══════╣\n\n");
+    Utente u = MenuLoginView.display();
+    sessione.Accedi(u.getUserId(), u.getPassword());
+    Utente uCorr = sessione.getUtenteCorrente();
+    if (uCorr != null) {
+      Feedback.success("Accesso eseguito, benvenuto " + uCorr.getUserId());
+    }
   }
 
 
