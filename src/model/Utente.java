@@ -1,6 +1,8 @@
 package model;
 
-public class Utente {
+import java.io.Serializable;
+
+public class Utente implements Serializable {
   String nome;
   String cognome;
   String codiceFiscale;

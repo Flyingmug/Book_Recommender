@@ -6,6 +6,11 @@ import model.Valutazione;
 
 import java.util.Scanner;
 
+/**
+ * Classe View (in base all'architettura MVC - ModelViewController) utilizzata per stampare a video i dati dei libri.
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander*/
+
 public class DisplayLibroView {
 
   final static String indicatore = "★";

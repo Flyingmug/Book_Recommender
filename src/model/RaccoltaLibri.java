@@ -77,7 +77,6 @@ public class RaccoltaLibri {
 
     return valMedia;
   }
-
   int calcolaMediaValutazione(List<Valutazione> lista, ToIntFunction<Valutazione> metodo) {
     return (int) lista.stream().mapToInt(metodo).average().orElse(0);
   }
