@@ -21,10 +21,13 @@ public class RaccoltaLibri {
 
   public List<Libro> getElenco() { return elenco; }
 
-  public void caricaElenco(String filename) {
+
+
+  public void caricaDati() {
     elenco = CSVFileManager.leggiDatiCsv("./data/Libri.dati.csv", Libro.class);
     valutazioni = CSVFileManager.leggiDatiCsv("./data/ValutazioniLibri.dati.csv", Valutazione.class);
   }
+
 
   public List<Libro> cercaLibro(String titolo, String autori, int annoPubblicazione, CriterioRicerca criterio) {
 

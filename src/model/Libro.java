@@ -21,13 +21,13 @@ public class Libro {
   public String getEditore() { return editore; }
   public String getCategorie() { return categorie; }
 
-  /*public String getAutoriString() {
-    String s = "";
-    for(int i = 0; i < autori.length; i++) {
-      s.concat(autori[i] + (i+1 < autori.length ? ", " : ""));
-    }
-    return s;
-  }*/
+  public void setEditore(String editore) {
+    this.editore = editore;
+  }
+
+  public void setCategorie(String categorie) {
+    this.categorie = categorie;
+  }
 
   public String toShortHandFullString() {
     return titolo + ", " + autori + ", " + annoPubblicazione;

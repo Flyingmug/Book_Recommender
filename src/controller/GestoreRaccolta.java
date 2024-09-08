@@ -3,27 +3,28 @@ package controller;
 import Utilities.Utils;
 import model.*;
 import Utilities.Feedback;
-import view.DisplayLibroView;
-import view.MenuCriterioRicercaView;
-import view.MenuPaginamentoRisultatiView;
-import view.MenuPrincipaleView;
+import view.*;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class GestoreRaccolta {
 
+  final String path_libri = "./data/Libri.dati.csv";
+  final String path_valutazioni = "./data/ValutazioniLibri.dati.csv";
+  final String path_utenti_registrati = "./data/UtentiRegistrati.dati.csv";
+  final String path_librerie_personali = "./data/Librerie.dati.csv";
+  final String path_consigli_lettura = "./data/ConsigliLibri.dati.csv";
+
   RaccoltaLibri raccolta;
-  Utente utenteCorrente;
+  GestoreSessione sessione;
   Scanner scanner;
   final int DIM_PAGINA = 15;
 
   public GestoreRaccolta(RaccoltaLibri raccolta) {
-    // temporary path selection
-    /*System.out.println("\n\n\n||||Directory:|||| " + System.getProperty("user.dir") + "\n");*/
     this.raccolta = raccolta;
-    raccolta.caricaElenco("./data/Libri.dati.csv");
-    /*raccolta.setElenco(CSVFileManager.leggiFile("./data/Libri.dati.csv"));*/
+    sessione = new GestoreSessione(path_utenti_registrati);
+    raccolta.caricaDati();
     scanner = new Scanner(System.in);
   }
 
@@ -50,9 +51,7 @@ public class GestoreRaccolta {
           iniziaRegistrazione();
           break;
         case "l":
-          System.out.println("\n\t╠═══════ Login ═══════╣\n\n");
-
-
+          iniziaLogin();
           break;
         case "a":
           System.out.println("\n\t╠═══════ Accesso ═══════╣\n\n");
@@ -195,17 +194,26 @@ public class GestoreRaccolta {
 
 
   void iniziaRegistrazione() {
-    /*funzionalità di registrazione*/
-    /*funzionalità di registrazione*/
-    /*funzionalità di registrazione*/
-    /*funzionalità di registrazione*/
-    /*funzionalità di registrazione*/
-    /*funzionalità di registrazione*/
-
     System.out.println("\n\t╠═══════ Registrazione ═══════╣\n\n");
+
+    Utente u = MenuRegistrazioneView.display();
+    /*il menu al momento non restituisce nulli*/
+    if (u != null)
+      try {
+        sessione.Registra(u);
+      } catch (RuntimeException e) {
+        Feedback.err(e.getMessage());
+      } finally {
+        Feedback.success("Registrazione avvenuta con successo");
+      }
+
   }
 
 
+
+  void iniziaLogin() {
+    System.out.println("\n\t╠═══════ Login ═══════╣\n\n");
+  }
 
 
 }
