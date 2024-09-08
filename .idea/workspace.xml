@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="lettura file">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/GestoreRaccolta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/GestoreRaccolta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/GestoreSessione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreSessione.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/RaccoltaLibri.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/RaccoltaLibri.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Utente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/DisplayLibroView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/DisplayLibroView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuCriterioRicercaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuCriterioRicercaView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuLoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuLoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuPrincipaleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuPrincipaleView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuRegistrazioneView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuRegistrazioneView.java" afterDir="false" />
-    </list>
+    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="lettura file" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,7 +98,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725745604511</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="lettura file">
+      <option name="closed" value="true" />
+      <created>1725829658717</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1725829658717</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
