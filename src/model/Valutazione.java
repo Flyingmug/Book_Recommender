@@ -75,5 +75,4 @@ public class Valutazione {
    * Metodo per settare il campo: edizione.
    * @param edizione int*/
   public void setEdizione(int edizione) { this.edizione = edizione; }
-
 }

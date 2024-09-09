@@ -1,5 +1,8 @@
 package Utilities;
 
+/**
+ * Classe utilizzata per avere a disposizione un elenco di colori
+ */
 public class ColoriConsole {
     // Reset
     public static final String RESET = "\033[0m";  // Text Reset

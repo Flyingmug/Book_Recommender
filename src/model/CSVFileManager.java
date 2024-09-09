@@ -26,7 +26,6 @@ public class CSVFileManager {
    * @param filePath String
    * @param classe Class<T>
    * @return  <T> List<T>*/
-
   public static <T> List<T> leggiDatiCsv(String filePath, Class<T> classe) {
     List<T> recordsList = new LinkedList<>();
 
@@ -109,6 +108,14 @@ public class CSVFileManager {
   /* Scrittura */
 
   // Generic method to write data to a CSV file
+
+  /**
+   *
+   * @param filePath
+   * @param recordsList
+   * @param appendMode
+   * @param <T>
+   */
   public static <T> void scriviDatiCsv(String filePath, List<T> recordsList, boolean appendMode) {
 
     // Aggiungi i header al file se non esiste
@@ -156,6 +163,14 @@ public class CSVFileManager {
   }
 
   // Method to get the headers for the CSV file based on the class type
+
+  /**
+   *
+   * @param classe
+   * @return
+   * @param <T>
+   * @throws UnknownClassException
+   */
   private static <T> String[] getHeaders(Class<T> classe) throws UnknownClassException {
     if (classe == Utente.class) {
       return new String[]{"Nome", "Cognome", "Codice Fiscale", "Email", "Userid", "Password"};
@@ -170,6 +185,12 @@ public class CSVFileManager {
   }
 
   // Method to convert each object to a CSV record
+
+  /**
+   *
+   * @param record
+   * @return
+   */
   private static Iterable<?> convertToCsvRecord(Object record) {
     if (record instanceof Utente user) {
       return List.of(user.getNome(), user.getCognome(), user.getCodiceFiscale(), user.getEmail(), user.getUserId(), user.getPassword());
@@ -185,6 +206,13 @@ public class CSVFileManager {
   }
 
   // Method to check if the file has headers
+
+  /**
+   *
+   * @param file
+   * @param classe
+   * @return
+   */
   private static boolean hasHeaders(File file, Class<?> classe) {
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
       String primaLinea = reader.readLine();

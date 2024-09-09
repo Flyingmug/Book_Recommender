@@ -1,5 +1,6 @@
 package view;
 
+import Utilities.Utils;
 import model.Utente;
 
 import java.util.Scanner;
@@ -16,7 +17,6 @@ public class MenuRegistrazioneView {
    * Metodo che preleva i dati per creare un nuovo utente.
    * Ritorna il nuovo utente che verrà aggiunto al file "UtentiRegistrati"
    * @return Utente*/
-
   public static Utente display() {
 
     System.out.print("╔ Nome: ");
@@ -25,6 +25,9 @@ public class MenuRegistrazioneView {
     String cognome = scanner.nextLine();
     System.out.print("╠ Codice Fiscale: ");
     String codFiscale = scanner.nextLine();
+
+    System.out.println("VERIFICA CODICE FISCALE: " + Utils.verCodiceFiscale(codFiscale));
+
     System.out.print("╠ Email: ");
     String email = scanner.nextLine();
     System.out.print("╠ User Id: ");
@@ -33,6 +36,5 @@ public class MenuRegistrazioneView {
     String password = scanner.nextLine();
 
     return new Utente(nome, cognome, codFiscale, email, userId, password);
-
   }
 }

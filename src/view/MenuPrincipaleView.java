@@ -9,7 +9,6 @@ import java.util.Scanner;
  * con l'elenco di operazioni.
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
-
 public class MenuPrincipaleView {
 
     final static String cy = ColoriConsole.CYAN;
@@ -20,7 +19,6 @@ public class MenuPrincipaleView {
     /**
      * Stampa a video il menu' principale con l'elenco di operazioni
      * @return String*/
-
     public static String displayMinimal() {
         // menu principale
         System.out.println("\n\t╬╬ Book Recommender ╬╬");
@@ -35,6 +33,10 @@ public class MenuPrincipaleView {
         return scanner.nextLine();
     }
 
+    /**
+     *
+     * @return String
+     */
     public static String displayFull() {
         // menu principale
         System.out.println("\n\t╬╬ Book Recommender ╬╬");
@@ -42,8 +44,6 @@ public class MenuPrincipaleView {
         System.out.println("║\n╠ ["+cy+"C"+rs+"] - Ricerca");
         System.out.println("╠ ["+cy+"O"+rs+"] - Logout");
         System.out.println("╠ ["+cy+"L"+rs+"] - Librerie personali");
-        System.out.println("╠ ["+cy+"temp"+rs+"] - opzione 1");
-        System.out.println("╠ ["+cy+"temp"+rs+"] - opzione 1");
         System.out.println("╠ ["+cy+"E"+rs+"] - Esci\n║");
         System.out.println("╠════════════════════════════");
         System.out.print("╠ >> ");

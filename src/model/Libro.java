@@ -15,7 +15,6 @@ public class Libro {
   int annoPubblicazione;
   String titolo;
   String autori;
-
   String editore;
   String categorie;
 

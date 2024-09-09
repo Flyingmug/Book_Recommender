@@ -28,14 +28,14 @@ public class MenuLibreriePersonali {
     int cifreNumOcc = String.valueOf(numOccorrenze).length();
 
 
-    System.out.println("\n\t╠═══════════ Librerie ═══════════╣\n");
+    System.out.println("\n\t╠═══════════ Librerie ═══════════╣\n\n");
 
     // visualizzazione dei risultati
     System.out.println("╔ Indice, Nome libreria, libri contenuti");
     int i = 0;
     String output = "";
     for (Libreria l: librerie) {
-      String indice = String.format("%0" + cifreNumOcc + "d", i/* + indicePaginaCorrente*dim_pagina*/+1);
+      String indice = String.format("%0" + cifreNumOcc + "d", i/* + indicePaginaCorrente*dim_pagina+1*/);
       output = l.getNomeLibreria();
       System.out.println(((i%2)==0?wb:cb)+"╠ "+indice+' '+output+rs+" ("+l.getConteggio()+')');
       i++;
@@ -44,7 +44,7 @@ public class MenuLibreriePersonali {
     System.out.println(rs+"╚\n");
 
     // computazione iterazione seguente
-    System.out.println(" ["+gr+"E"+rs+"]sci, ["+pr+"N"+rs+"]uova, ["+pr+"R"+rs+"]rimuovi,\n ["+gr+"A"+rs+"]vanti, ["+gr+"I"+rs+"]ndietro," +
+    System.out.println(" ["+gr+"E"+rs+"]sci, ["+pr+"N"+rs+"]uova, ["+pr+"C"+rs+"]ancella,\n ["+gr+"A"+rs+"]vanti, ["+gr+"I"+rs+"]ndietro," +
         " numero di ["+gr+"P"+rs+"]agina\n oppure "+gr+"indice"+rs+" della libreria per visualizzarla");
     System.out.print(" >> ");
     return scanner.nextLine();

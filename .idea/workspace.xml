@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="Aggiunta ed eliminazione di librerie, gestione di librerie duplicate">
-      <change afterPath="$PROJECT_DIR$/src/model/ModalitaAccesso.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/RichiestaRicerca.java" afterDir="false" />
+    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="Gestione errori e autenticazione migliorati">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/Librerie.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/Librerie.dati.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/GestoreLibrerie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreLibrerie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/GestoreRaccolta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreRaccolta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/DisplayLibroView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/DisplayLibroView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuCriterioRicercaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuCriterioRicercaView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Libreria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Libreria.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MenuLibreriePersonali.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuLibreriePersonali.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +21,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Exception" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
@@ -57,7 +51,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Main.executor": "Run",
+    "Application.Main.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "dart.analysis.tool.window.visible": "false",
@@ -141,15 +135,7 @@
       <option name="project" value="LOCAL" />
       <updated>1725909272268</updated>
     </task>
-    <task id="LOCAL-00008" summary="Aggiunta ed eliminazione di librerie, gestione di librerie duplicate">
-      <option name="closed" value="true" />
-      <created>1725910854019</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1725910854019</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -169,21 +155,20 @@
     <MESSAGE value="lettura file" />
     <MESSAGE value="Login" />
     <MESSAGE value="Gestione errori e autenticazione migliorati" />
-    <MESSAGE value="Aggiunta ed eliminazione di librerie, gestione di librerie duplicate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta ed eliminazione di librerie, gestione di librerie duplicate" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gestione errori e autenticazione migliorati" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/model/GestoreLibrerie.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="42" />
+          <line>61</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controller/Controller.java</url>
-          <line>264</line>
-          <option name="timeStamp" value="55" />
+          <url>file://$PROJECT_DIR$/src/model/GestoreLibrerie.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

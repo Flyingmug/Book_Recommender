@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.ToIntFunction;
 
 /**
+ * Classe che gestisce le librerie
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
 public class GestoreRaccolta {
@@ -75,7 +76,6 @@ public class GestoreRaccolta {
         break;
     }
     return risultato;
-
   }
 
   /**

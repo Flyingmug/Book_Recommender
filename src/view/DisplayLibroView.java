@@ -11,7 +11,6 @@ import java.util.Scanner;
  * Classe View (in base all'architettura MVC - ModelViewController) utilizzata per stampare a video i dati dei libri.
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
-
 public class DisplayLibroView {
 
   final static String indicatore = "★";
@@ -24,7 +23,12 @@ public class DisplayLibroView {
 
   final static Scanner scanner = new Scanner(System.in);
 
-
+  /**
+   * Visualizzazione video
+   * @param l
+   * @param valMedia
+   * @return String
+   */
   public static String display(Libro l, Valutazione valMedia) {
 
     String editore = l.getEditore();
@@ -57,6 +61,5 @@ public class DisplayLibroView {
 
 
     return scanner.nextLine();
-
   }
 }

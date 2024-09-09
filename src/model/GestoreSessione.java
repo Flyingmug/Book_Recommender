@@ -55,10 +55,11 @@ public class GestoreSessione {
     }
   }
 /**
- *Metodo privato, serve a cercare se un utente esiste tra gli utenti, e se esiste ritorna la prima occorrenza.
- @param password String
- @param userId String
- @return Utente
+*Il metodo cercaUtente è un metodo privato;
+ * serve a verificare che un dato utente esista, e se esiste ritorna la prima occorrenza.
+ * @param password String
+ * @param userId String
+ * @return Utente
  */
   private Utente cercaUtente(String userId, String password) {
     List<Utente> elencoUtentiRegistrati = CSVFileManager.leggiDatiCsv(filePathUtenti, Utente.class);
