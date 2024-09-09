@@ -28,8 +28,6 @@ public class Libreria {
 
   @Override
   public boolean equals(Object obj) {
-    if (!obj.getClass().equals(Libreria.class)) return false;
-    Libreria l = (Libreria) obj;
-    return idLibreria.equals(l.getIdLibreria()) && nome.equals(l.getNomeLibreria());
+    return obj.getClass() == Libreria.class && this.nome.equals(((Libreria) obj).getNomeLibreria());
   }
 }

@@ -5,21 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="Gestione errori e autenticazione migliorati">
-      <change afterPath="$PROJECT_DIR$/src/model/EntryLibreria.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/GestoreLibrerie.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Libreria.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/MenuLibreriePersonali.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utilities/Feedback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities/Feedback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/GestoreRaccolta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/CSVFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CSVFileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Libro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Libro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/RaccoltaLibri.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreRaccolta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuLoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuLoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuPrincipaleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuPrincipaleView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Librerie.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/Librerie.dati.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GestoreLibrerie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreLibrerie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Libreria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Libreria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MenuLibreriePersonali.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuLibreriePersonali.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725890188749</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Gestione errori e autenticazione migliorati">
+      <option name="closed" value="true" />
+      <created>1725909272268</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1725909272268</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -170,16 +169,6 @@
           <url>file://$PROJECT_DIR$/src/model/GestoreLibrerie.java</url>
           <line>24</line>
           <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/model/GestoreLibrerie.java</url>
-          <line>109</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/model/CSVFileManager.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

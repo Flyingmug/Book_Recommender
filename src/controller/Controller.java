@@ -260,16 +260,28 @@ public class Controller {
           if (!libreriePersonali.getLibrerie().contains(lib))
             libreriePersonali.aggiungiLibreria(lib, idUtenteCorrente);
           else
-            Feedback.warn("La libreria è già presente");
+            Feedback.warn("La libreria " + lib.getNomeLibreria() + " è già presente");
           break;
 
         case "c":
-
+          String indiceEliminazione = MenuLibreriePersonali.displayEliminazione();
+          if (Utils.isInteger(indiceEliminazione)) {
+            // visualizzazione dati di un libro
+            int indice = Integer.parseInt(indiceEliminazione);
+            if (indice > 0 && indice <= numOccorrenze) {
+              libreriePersonali.elimina(indice);
+              Feedback.success("Libreria eliminata");
+            } else
+              Feedback.warn("Indice selezionato non valido");
+          } else
+            Feedback.warn("Solo numeri interi ammessi");
           break;
 
         case "e":
           uscitaGestioneLibrerie = true;
+
         default:
+
           break;
       }
 

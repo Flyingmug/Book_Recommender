@@ -120,4 +120,7 @@ public class GestoreLibrerie {
     CSVFileManager.scriviDatiCsv(path_librerie, entries, true);
   }
 
+  public void elimina(int indice) {
+    librerie.remove(indice);
+  }
 }

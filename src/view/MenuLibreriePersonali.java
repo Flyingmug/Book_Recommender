@@ -52,12 +52,15 @@ public class MenuLibreriePersonali {
 
 
   public static Libreria displayCreazione() {
-
-    System.out.println("Nome libreria: ");
+    System.out.print("╠ Nome libreria: \n >> ");
     String nome = scanner.nextLine();
 
     UUID uuid = UUID.randomUUID();
     return new Libreria(uuid.toString(), nome);
+  }
 
+  public static String displayEliminazione() {
+    System.out.print("╠ Scegliere tramite indice: \n >> ");
+    return scanner.nextLine();
   }
 }
