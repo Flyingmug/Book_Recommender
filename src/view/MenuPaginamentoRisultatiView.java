@@ -17,6 +17,7 @@ public class MenuPaginamentoRisultatiView {
 
     final static String rs = ColoriConsole.RESET;
     final static String gr = ColoriConsole.GREEN;
+    final static String bl = ColoriConsole.BLUE;
     final static String cb = ColoriConsole.CYAN_BOLD;
     final static String wb = ColoriConsole.WHITE_BOLD;
 
@@ -39,7 +40,7 @@ public class MenuPaginamentoRisultatiView {
         // informazioni sulla ricerca
         System.out.println("\n════════════════════════════════════");
         System.out.println("  Pagina "+gr+(indicePaginaCorrente+1)+rs+" di "+numeroPagine+" ("+numOccorrenze+" risultati)\n");
-        System.out.println("╔ Indice, Titolo, Autori, Anno di pubblicazione");
+        System.out.println("╔ " + buildHeader(criterio));
 
 
         // visualizzazione dei risultati
@@ -54,7 +55,7 @@ public class MenuPaginamentoRisultatiView {
         System.out.println(rs+"╚\n");
 
         // computazione iterazione seguente
-        System.out.println(" ["+gr+"E"+rs+"]sci\n ["+gr+"A"+rs+"]vanti, ["+gr+"I"+rs+"]ndietro," +
+        System.out.println(" ["+gr+"E"+rs+"]sci, ["+bl+"C"+rs+"]erca\n ["+gr+"A"+rs+"]vanti, ["+gr+"I"+rs+"]ndietro," +
                 " numero di ["+gr+"P"+rs+"]agina\n oppure "+gr+"indice"+rs+" del libro per visualizzarlo");
         System.out.print(" >> ");
         return scanner.nextLine();
@@ -78,11 +79,18 @@ public class MenuPaginamentoRisultatiView {
      */
     static String formattaOutputSingolo(Libro l, CriterioRicerca c) {
 
-        if (Objects.requireNonNull(c) == CriterioRicerca.AUTORE) {
-            return l.getAutori() + " - " + l.getTitolo();
-        } else if (c == CriterioRicerca.AUTORE_ANNO) {
-            return l.getAutori() + ", " + l.getAnnoPubblicazione() + " - " + l.getTitolo();
-        }
-        return l.toShortHandFullString();
+        return switch (c) {
+            case AUTORE -> l.getAutori() + " - " + l.getTitolo();
+            case AUTORE_ANNO -> l.getAutori() + ", " + l.getAnnoPubblicazione() + " - " + l.getTitolo();
+            default -> l.toShortHandFullString();
+        };
+    }
+
+    static String buildHeader(CriterioRicerca c) {
+      return switch (c) {
+        case AUTORE -> "Autori, Titolo";
+        case AUTORE_ANNO -> "Autori, Anno di pubblicazione, Titolo";
+        default -> "Titolo, Autori, Anno di pubblicazione";
+      };
     }
 }

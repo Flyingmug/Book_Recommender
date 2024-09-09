@@ -10,14 +10,14 @@ import java.util.function.ToIntFunction;
 public class GestoreRaccolta {
 
   List<Libro> elenco;
-  List<Valutazione> valutazioni;
+  /*List<Valutazione> valutazioni;*/
 
   /**
    * Costruttore RaccoltaLibri.
    * Istanzia una lista di libri e una lista di valutazioni vuoti*/
   public GestoreRaccolta() {
     elenco = new LinkedList<>();
-    valutazioni = new LinkedList<>();
+    /*valutazioni = new LinkedList<>();*/
   }
 
   /**
@@ -38,40 +38,37 @@ public class GestoreRaccolta {
    */
   public void caricaDati(String pathLibri, String pathValutazioni) {
     elenco = CSVFileManager.leggiDatiCsv(pathLibri, Libro.class);
-    valutazioni = CSVFileManager.leggiDatiCsv(pathValutazioni, Valutazione.class);
+    /*valutazioni = CSVFileManager.leggiDatiCsv(pathValutazioni, Valutazione.class);*/
   }
 
 /**
  * Dopo aver verificato che l'utente abbia scelto un criterio adeguato, viene effettuata la ricerca del libro corrispondente.
- * @param titolo String
- * @param autori String
- * @param annoPubblicazione int
- * @param criterio CriterioRicerca
+ * @param richiesta RichiestaRicerca
  * @return List<Libro>
  */
-  public List<Libro> cercaLibro(String titolo, String autori, int annoPubblicazione, CriterioRicerca criterio) {
+  public List<Libro> cercaLibro(RichiestaRicerca richiesta) {
 
     List<Libro> risultato = new LinkedList<>();
 
-    if (criterio == null) {
+    if (richiesta.getCriterio() == null) {
       return risultato;
     }
-    switch (criterio) {
+    switch (richiesta.getCriterio()) {
       case CriterioRicerca.TITOLO:
         risultato = elenco.stream()
-                .filter(x -> x.getTitolo().toLowerCase().contains(titolo.toLowerCase()))
+                .filter(x -> x.getTitolo().toLowerCase().contains(richiesta.getTitolo().toLowerCase()))
                 .toList();
         break;
       case CriterioRicerca.AUTORE:
         System.out.println("\nRicerca per autore");
         risultato = elenco.stream()
-                .filter(x -> x.getAutori().toLowerCase().contains(autori.toLowerCase()))
+                .filter(x -> x.getAutori().toLowerCase().contains(richiesta.getAutore().toLowerCase()))
                 .toList();
         break;
       case CriterioRicerca.AUTORE_ANNO:
         risultato =  elenco.stream()
-                .filter(x -> x.getAutori().toLowerCase().contains(autori.toLowerCase())
-                        && x.getAnnoPubblicazione() == annoPubblicazione)
+                .filter(x -> x.getAutori().toLowerCase().contains(richiesta.getAutore().toLowerCase())
+                        && x.getAnnoPubblicazione() == richiesta.getAnnoPubblicazione())
                 .toList();
         break;
       default:
@@ -89,17 +86,14 @@ public class GestoreRaccolta {
    * @param limite int
    * @return List<Libro>
    */
-  public List<Libro> sottoRaccolta(List<Libro> elenco, int salto, int limite) {
+  public static List<Libro> sottoRaccolta(List<Libro> elenco, int salto, int limite) {
     return elenco.subList(salto, Math.min(salto + limite, elenco.size()));
   }
 
-  /**
-   * @param l Libro
-   * @return Valutazione
-   */
-  public Valutazione ottieniValutazioneMediaLibro(Libro l) {
 
-    /*la valutazione media qui funziona solo con la media di tutte le valutazioni?*/
+  /*public Valutazione ottieniValutazioneMediaLibro(Libro l) {
+
+    *//*la valutazione media qui funziona solo con la media di tutte le valutazioni?*//*
     Valutazione valMedia = new Valutazione();
     valMedia.setStile(calcolaMediaValutazione(valutazioni, Valutazione::getStile));
     valMedia.setContenuto(calcolaMediaValutazione(valutazioni, Valutazione::getContenuto));
@@ -108,7 +102,7 @@ public class GestoreRaccolta {
     valMedia.setEdizione(calcolaMediaValutazione(valutazioni, Valutazione::getEdizione));
 
     return valMedia;
-  }
+  }*/
   int calcolaMediaValutazione(List<Valutazione> lista, ToIntFunction<Valutazione> metodo) {
     return (int) lista.stream().mapToInt(metodo).average().orElse(0);
   }

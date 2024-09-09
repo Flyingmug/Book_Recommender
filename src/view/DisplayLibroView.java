@@ -2,6 +2,7 @@ package view;
 
 import Utilities.ColoriConsole;
 import model.Libro;
+import model.Utente;
 import model.Valutazione;
 
 import java.util.Scanner;
@@ -16,9 +17,10 @@ public class DisplayLibroView {
   final static String indicatore = "★";
 
   final static String rs = ColoriConsole.RESET;
-  final static String yb = ColoriConsole.YELLOW_BOLD;
   final static String cy = ColoriConsole.CYAN;
   final static String gr = ColoriConsole.GREEN;
+  final static String pr = ColoriConsole.PURPLE;
+  final static String yb = ColoriConsole.YELLOW_BOLD;
 
   final static Scanner scanner = new Scanner(System.in);
 
@@ -48,7 +50,11 @@ public class DisplayLibroView {
     System.out.println("║╠ Edizione      " + yb + indicatore.repeat(valMedia.getEdizione()) + rs);
     System.out.println("╩╩");
 
-    System.out.print("\n ["+gr+"C"+rs+"]ontinua o ["+gr+"E"+rs+"]sci\n >> ");
+    System.out.println("\n ["+gr+"E"+rs+"]sci");
+
+    System.out.println(" ["+pr+"V"+rs+"]aluta il libro");
+    System.out.print(" ["+pr+"S"+rs+"]uggerisci libri\n >> ");
+
 
     return scanner.nextLine();
 

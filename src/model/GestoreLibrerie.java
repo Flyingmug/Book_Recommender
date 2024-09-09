@@ -112,7 +112,7 @@ public class GestoreLibrerie {
 
   }
 
-  public void aggiungiLibreria(Libreria l, String idUtente) {
+  public void registraLibreria(Libreria l, String idUtente) {
 
     librerie.add(l);
     List<EntryLibreria> entries = new LinkedList<>();
@@ -120,7 +120,10 @@ public class GestoreLibrerie {
     CSVFileManager.scriviDatiCsv(path_librerie, entries, true);
   }
 
-  public void elimina(int indice) {
-    librerie.remove(indice);
+  public void elimina(int indice, String idUtente) {
+    Libreria libRimossa = librerie.remove(indice);
+    List<EntryLibreria> entries = CSVFileManager.leggiDatiCsv(path_librerie, EntryLibreria.class);
+    entries.removeAll(entries.stream().filter(x -> x.getNomeLibreria().equals(libRimossa.nome) && x.getIdUtente().equals(idUtente)).toList());
+    CSVFileManager.scriviDatiCsv(path_librerie, entries, false);
   }
 }

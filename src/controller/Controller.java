@@ -5,7 +5,6 @@ import model.*;
 import Utilities.Feedback;
 import view.*;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,11 +53,9 @@ public class Controller {
           MenuPrincipaleView.displayFull() :
           MenuPrincipaleView.displayMinimal();
 
-      // aggiungere controllo dell'input
-
       switch (scelta.toLowerCase()) {
         case "c":
-          iniziaRicerca();
+          iniziaRicerca(raccolta, ModalitaAccesso.READING, null);
           break;
         case "r":
           if (accessoEseguito)
@@ -79,12 +76,6 @@ public class Controller {
           } else
             Feedback.warn("L'accesso non è stato eseguito");
           break;
-
-        case "g":
-          System.out.println("\n\t╠═══════ g ═══════╣\n\n");
-
-          break;
-
         case "e":
           uscita = true;
           break;
@@ -106,63 +97,50 @@ public class Controller {
 * Autore
 * Autore e anno
  * */
-  void iniziaRicerca() {
-    MenuCriterioRicercaView.display();
+  void iniziaRicerca(GestoreRaccolta raccoltaLibri, ModalitaAccesso modalita, RichiestaRicerca richiestaIniziale) {
 
-    /* acquisizione chiavi e selezione del criterio di ricerca */
-    String titolo = "", autori= "";
-    int annoPubblicazione = 0;
-    CriterioRicerca criterio;
-    String c = scanner.nextLine();
-    switch (c.toLowerCase()) {
-      case "t":
-        criterio = CriterioRicerca.TITOLO;
-        System.out.print("║\n║ Titolo\n╠ >> ");
-        titolo = scanner.nextLine();
-        break;
-      case "a":
-        criterio = CriterioRicerca.AUTORE;
-        System.out.print("║\n║ Autore\n╠ >> ");
-        autori = scanner.nextLine();
-        break;
-      case "aa":
-        criterio = CriterioRicerca.AUTORE_ANNO;
-        System.out.print("║\n║ Autore\n╠ >> ");
-        autori = scanner.nextLine();
-        System.out.print("║ Anno\n╠ >> ");
-        try {
-          annoPubblicazione = Integer.parseInt(scanner.nextLine());
-        } catch (NumberFormatException e) {
-          System.err.println("Formato numerico per l'anno fornito non valido.");
-        }
-        break;
+    boolean richiestaNuovaRicerca;
 
-      default:
-        Feedback.warn("Criterio non valido");
-        return;
-    }
+    do {
+      RichiestaRicerca req;
 
-    GestoreRaccolta risultati = new GestoreRaccolta(raccolta.cercaLibro(titolo, autori, annoPubblicazione, criterio));
+      // verifica se vi è una richiesta di ricerca iniziale
+      if (richiestaIniziale == null) {
 
-    // visualizzazione pagine dei risultati
-    iniziaPaginazioneRisultati(risultati, criterio);
+        req = MenuCriterioRicercaView.display();
+        if (req == null) return;
+
+      } else {
+        // utilizza la richiesta iniziale
+        req = richiestaIniziale;
+      }
+
+      // Cerca dalla raccolta
+      List<Libro> risultati = raccoltaLibri.cercaLibro(req);
+
+      // visualizzazione pagine dei risultati
+      richiestaNuovaRicerca = iniziaPaginazioneRisultati(risultati, req.getCriterio(), modalita);
+
+    } while (richiestaNuovaRicerca);
+
   }
+
 
 
 
 /**
  * Metodo che mostra i risultati di ricerca (libri) sotto forma di pagine tra cui scorrere
  * @param risultati RaccoltaLibri
- * @param criterio CriterioRicerca */
-  void iniziaPaginazioneRisultati(GestoreRaccolta risultati, CriterioRicerca criterio) {
+ * @param criterio CriterioRicerca
+ * @return true per una nuova richiesta di ricerca, false per richiedere di uscire */
+  boolean iniziaPaginazioneRisultati(List<Libro> risultati, CriterioRicerca criterio, ModalitaAccesso editing) {
     String sceltaOpzionePagina;
-    boolean uscitaPaginaRisultati = false;
     int indicePaginaCorrente = 0;
-    int numOccorrenze = risultati.getElenco().size();
+    int numOccorrenze = risultati.size();
     int numeroPagine = (int) Math.max(1, Math.ceil((double) numOccorrenze/DIM_PAGINA));
 
     do {
-      List<Libro> paginaRisultati = raccolta.sottoRaccolta(risultati.getElenco(), indicePaginaCorrente*DIM_PAGINA, DIM_PAGINA);
+      List<Libro> paginaRisultati = GestoreRaccolta.sottoRaccolta(risultati, indicePaginaCorrente*DIM_PAGINA, DIM_PAGINA);
 
       sceltaOpzionePagina = MenuPaginamentoRisultatiView.display(paginaRisultati, indicePaginaCorrente, numOccorrenze, numeroPagine, DIM_PAGINA, criterio);
 
@@ -188,17 +166,18 @@ public class Controller {
             } else
               Feedback.warn("Solo numeri interi ammessi");
             break;
+          case "c":
+            return true;
 
           case "e":
-            uscitaPaginaRisultati = true;
-            break;
+            return false;
 
           default:
             if (Utils.isInteger(sceltaOpzionePagina)) {
               // visualizzazione dati di un libro
               int indice = Integer.parseInt(sceltaOpzionePagina);
               if (indice > 0 && indice <= numOccorrenze) {
-                visualizzaLibro(risultati.getElenco().get(indice));
+                visualizzaLibro(risultati.get(indice));
               } else
                 Feedback.warn("Indice selezionato non valido");
             } else
@@ -207,7 +186,8 @@ public class Controller {
             break;
         }
 
-    } while (!uscitaPaginaRisultati);
+    } while (true);
+
   }
 
 
@@ -217,12 +197,23 @@ public class Controller {
  * @param l Libro*/
   void visualizzaLibro(Libro l) {
 
-    Valutazione valMedia = raccolta.ottieniValutazioneMediaLibro(l);
+    Valutazione valMedia = new Valutazione(1, 1, 1, 1, 1); /*raccolta.ottieniValutazioneMediaLibro(l);*/
 
     boolean uscitaPaginaLibro = false;
     do {
 
       String scelta = DisplayLibroView.display(l, valMedia);
+      switch (scelta.toLowerCase()) {
+        case "c":
+
+          break;
+        case "v":
+
+          break;
+        case "e":
+          break;
+      }
+
       if (scelta.equalsIgnoreCase("c")) {
         System.out.println("Placeholder");
         System.out.println("Placeholder");  // mostra consigli di libri
@@ -258,18 +249,19 @@ public class Controller {
         case "n":
           Libreria lib = MenuLibreriePersonali.displayCreazione();
           if (!libreriePersonali.getLibrerie().contains(lib))
-            libreriePersonali.aggiungiLibreria(lib, idUtenteCorrente);
+            libreriePersonali.registraLibreria(lib, idUtenteCorrente);
           else
             Feedback.warn("La libreria " + lib.getNomeLibreria() + " è già presente");
           break;
 
-        case "c":
+        case "r":
           String indiceEliminazione = MenuLibreriePersonali.displayEliminazione();
           if (Utils.isInteger(indiceEliminazione)) {
             // visualizzazione dati di un libro
             int indice = Integer.parseInt(indiceEliminazione);
             if (indice > 0 && indice <= numOccorrenze) {
-              libreriePersonali.elimina(indice);
+              libreriePersonali.elimina(--indice, idUtenteCorrente);
+              numOccorrenze--;
               Feedback.success("Libreria eliminata");
             } else
               Feedback.warn("Indice selezionato non valido");
@@ -281,7 +273,15 @@ public class Controller {
           uscitaGestioneLibrerie = true;
 
         default:
-
+          if (Utils.isInteger(sceltaOperazioneLibreria)) {
+            // visualizzazione dati di un libro
+            int indice = Integer.parseInt(sceltaOperazioneLibreria);
+            if (indice > 0 && indice <= numOccorrenze) {
+              visualizzaLibreria(libreriePersonali.getLibrerie().get(indice));
+            } else
+              Feedback.warn("Indice selezionato non valido");
+          } else
+            Feedback.warn("Operazione inesistente");
           break;
       }
 
@@ -292,8 +292,19 @@ public class Controller {
 
 
 
-/**
- * */
+  public void visualizzaLibreria(Libreria libreria) {
+
+    // crea una richiesta di ricerca nulla (restituisce tutti i risultati)
+    RichiestaRicerca richiestaInit =
+        new RichiestaRicerca("", "", 0, CriterioRicerca.TITOLO);
+
+    GestoreRaccolta raccoltaParziale = new GestoreRaccolta(libreria.getElencoLibri());
+    iniziaRicerca(raccoltaParziale, ModalitaAccesso.OPERATING, richiestaInit);
+
+  }
+
+
+
   void iniziaRegistrazione() {
     System.out.println("\n\t╠═══════ Registrazione ═══════╣\n\n");
 
