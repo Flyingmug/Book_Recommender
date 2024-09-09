@@ -13,9 +13,21 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Classe responsabile della gestione lettura/scrittura nei file di tipo CSV (database utenti)
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander*/
+
 public class CSVFileManager {
 
   /* lettura */
+
+
+  /**
+   * Reperisce il file
+   * @param filePath String
+   * @param classe Class<T>
+   * @return  <T> List<T>*/
 
   public static <T> List<T> leggiDatiCsv(String filePath, Class<T> classe) {
     List<T> recordsList = new LinkedList<>();

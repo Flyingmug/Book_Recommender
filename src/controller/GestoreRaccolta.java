@@ -9,7 +9,8 @@ import java.util.Scanner;
 
 /**
  * La classe GestoreRaccolta viene utilizzata per avviare il programma e presentare il menu' con le funzionalita' all'utente
- * */
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander*/
 public class GestoreRaccolta {
 
   final String path_libri = "./data/Libri.dati.csv";

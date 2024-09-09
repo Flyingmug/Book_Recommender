@@ -4,8 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Offre dei metodi per potersi autenticare, e utilizza CSVFileManager per salvare i dati.
- * L'utente attuale è ottenibile tramite getUtenteCorrente()
+ * Offre dei metodi per potersi autenticare, e utilizza CSVFileManager per salvare i dati dell'eventuale nuovo utente.
  * @author Selimi Sebian*/
 
 public class GestoreSessione {
@@ -39,6 +38,9 @@ public class GestoreSessione {
     utenteCorrente = null;
   }
 
+  /**
+   * Verifica se il nome utente selezionato è già utilizzato; se non esiste lo aggiunge e lo imposta come utente corrente
+   * @param u Utente*/
   public void registra(Utente u)
       throws UserIdUnavailableException {
 
@@ -52,7 +54,12 @@ public class GestoreSessione {
       utenteCorrente = u;
     }
   }
-
+/**
+ *Metodo privato, serve a cercare se un utente esiste tra gli utenti, e se esiste ritorna la prima occorrenza.
+ @param password String
+ @param userId String
+ @return Utente
+ */
   private Utente cercaUtente(String userId, String password) {
     List<Utente> elencoUtentiRegistrati = CSVFileManager.leggiDatiCsv(filePathUtenti, Utente.class);
     List<Utente> risultato = elencoUtentiRegistrati.stream().filter(x -> x.userId.equals(userId) && x.password.equals(password)).toList();
