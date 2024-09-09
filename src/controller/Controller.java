@@ -4,14 +4,16 @@ import Utilities.Utils;
 import model.*;
 import Utilities.Feedback;
 import view.*;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 /**
- * La classe GestoreRaccolta viene utilizzata per avviare il programma e presentare il menu' con le funzionalita' all'utente
+ * La classe Controller viene utilizzata per avviare il programma e presentare il menu' con le funzionalita' all'utente
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
-public class GestoreRaccolta {
+public class Controller {
 
   final String path_libri = "./data/Libri.dati.csv";
   final String path_valutazioni = "./data/ValutazioniLibri.dati.csv";
@@ -19,18 +21,17 @@ public class GestoreRaccolta {
   final String path_librerie_personali = "./data/Librerie.dati.csv";
   final String path_consigli_lettura = "./data/ConsigliLibri.dati.csv";
 
-  RaccoltaLibri raccolta;
+  GestoreRaccolta raccolta;
   GestoreSessione sessione;
   Scanner scanner;
   final int DIM_PAGINA = 15;
 
   /**
-   * Costruttore GestoreRaccolta
-   * @param raccolta RaccoltaLibri */
-  public GestoreRaccolta(RaccoltaLibri raccolta) {
-    this.raccolta = raccolta;
+   * Costruttore Controller del sistema */
+  public Controller() {
+    raccolta = new GestoreRaccolta();
+    raccolta.caricaDati(path_libri, path_valutazioni);
     sessione = new GestoreSessione(path_utenti_registrati);
-    raccolta.caricaDati();
     scanner = new Scanner(System.in);
   }
 
@@ -46,8 +47,10 @@ public class GestoreRaccolta {
 
     do {
 
+      boolean accessoEseguito = sessione.getUtenteCorrente() != null;
+
       // DISPLAY deve avere nella descrizione del funzionamento indicata la restituzione della scelta fatta dall'utente
-      scelta = sessione.getUtenteCorrente() != null ?
+      scelta = accessoEseguito ?
           MenuPrincipaleView.displayFull() :
           MenuPrincipaleView.displayMinimal();
 
@@ -58,23 +61,30 @@ public class GestoreRaccolta {
           iniziaRicerca();
           break;
         case "r":
-          if (sessione.getUtenteCorrente() != null)
-            Feedback.warn("L'utente ha già eseguito l'accesso");
+          if (accessoEseguito)
+            Feedback.warn("L'accesso è già stato eseguito");
           else
             iniziaRegistrazione();
           break;
         case "l":
-          iniziaLogin();
-          break;
-        case "a":
-          System.out.println("\n\t╠═══════ Accesso ═══════╣\n\n");
-
-
+          if (accessoEseguito)
+            iniziaGestioneLibrerie();
+          else
+            iniziaLogin();
           break;
         case "o":
-          sessione.esci();
-          Feedback.success("Utente disconnesso");
+          if (accessoEseguito) {
+            sessione.esci();
+            Feedback.success("Utente disconnesso");
+          } else
+            Feedback.warn("L'accesso non è stato eseguito");
           break;
+
+        case "g":
+          System.out.println("\n\t╠═══════ g ═══════╣\n\n");
+
+          break;
+
         case "e":
           uscita = true;
           break;
@@ -132,18 +142,19 @@ public class GestoreRaccolta {
         return;
     }
 
-    RaccoltaLibri risultati = new RaccoltaLibri(raccolta.cercaLibro(titolo, autori, annoPubblicazione, criterio));
+    GestoreRaccolta risultati = new GestoreRaccolta(raccolta.cercaLibro(titolo, autori, annoPubblicazione, criterio));
 
     // visualizzazione pagine dei risultati
     iniziaPaginazioneRisultati(risultati, criterio);
   }
 
 
+
 /**
  * Metodo che mostra i risultati di ricerca (libri) sotto forma di pagine tra cui scorrere
  * @param risultati RaccoltaLibri
  * @param criterio CriterioRicerca */
-  void iniziaPaginazioneRisultati(RaccoltaLibri risultati, CriterioRicerca criterio) {
+  void iniziaPaginazioneRisultati(GestoreRaccolta risultati, CriterioRicerca criterio) {
     String sceltaOpzionePagina;
     boolean uscitaPaginaRisultati = false;
     int indicePaginaCorrente = 0;
@@ -199,6 +210,8 @@ public class GestoreRaccolta {
     } while (!uscitaPaginaRisultati);
   }
 
+
+
 /**
  * Metodo utilizzato per stampare a video il/i libro/i richiesto (tramite classe DisplayLibroView)
  * @param l Libro*/
@@ -220,6 +233,51 @@ public class GestoreRaccolta {
 
     } while(!uscitaPaginaLibro);
   }
+
+
+
+  void iniziaGestioneLibrerie() {
+
+    String idUtenteCorrente = sessione.getUtenteCorrente().getUserId();
+
+    GestoreLibrerie libreriePersonali = new GestoreLibrerie(path_librerie_personali);
+    libreriePersonali.caricaDatiLibrerie(idUtenteCorrente, raccolta.getElenco());
+
+    String sceltaOperazioneLibreria;
+    boolean uscitaGestioneLibrerie = false;
+    int indicePaginaCorrente = 0;
+    int numOccorrenze = libreriePersonali.getLibrerie().size();
+    int numeroPagine = (int) Math.max(1, Math.ceil((double) numOccorrenze/DIM_PAGINA));
+
+
+    do {
+      // aggiungere paginazione delle librerie o limite di librerie per utente
+      sceltaOperazioneLibreria = MenuLibreriePersonali.display(libreriePersonali.getLibrerie(), numOccorrenze);
+
+      switch (sceltaOperazioneLibreria.toLowerCase()) {
+        case "n":
+          Libreria lib = MenuLibreriePersonali.displayCreazione();
+          if (!libreriePersonali.getLibrerie().contains(lib))
+            libreriePersonali.aggiungiLibreria(lib, idUtenteCorrente);
+          else
+            Feedback.warn("La libreria è già presente");
+          break;
+
+        case "c":
+
+          break;
+
+        case "e":
+          uscitaGestioneLibrerie = true;
+        default:
+          break;
+      }
+
+
+    } while (!uscitaGestioneLibrerie);
+
+  }
+
 
 
 /**

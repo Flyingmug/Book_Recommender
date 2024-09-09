@@ -41,7 +41,7 @@ public class MenuPrincipaleView {
         System.out.println("╔════════════════════════════");
         System.out.println("║\n╠ ["+cy+"C"+rs+"] - Ricerca");
         System.out.println("╠ ["+cy+"O"+rs+"] - Logout");
-        System.out.println("╠ ["+cy+"temp"+rs+"] - opzione 1");
+        System.out.println("╠ ["+cy+"L"+rs+"] - Librerie personali");
         System.out.println("╠ ["+cy+"temp"+rs+"] - opzione 1");
         System.out.println("╠ ["+cy+"temp"+rs+"] - opzione 1");
         System.out.println("╠ ["+cy+"E"+rs+"] - Esci\n║");

@@ -39,7 +39,7 @@ public class MenuPaginamentoRisultatiView {
         // informazioni sulla ricerca
         System.out.println("\n════════════════════════════════════");
         System.out.println("  Pagina "+gr+(indicePaginaCorrente+1)+rs+" di "+numeroPagine+" ("+numOccorrenze+" risultati)\n");
-        System.out.println("╔ Titolo, Autori, Anno di pubblicazione");
+        System.out.println("╔ Indice, Titolo, Autori, Anno di pubblicazione");
 
 
         // visualizzazione dei risultati

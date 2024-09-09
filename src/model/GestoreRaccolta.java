@@ -7,15 +7,15 @@ import java.util.function.ToIntFunction;
 /**
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
-public class RaccoltaLibri {
+public class GestoreRaccolta {
 
   List<Libro> elenco;
   List<Valutazione> valutazioni;
 
   /**
    * Costruttore RaccoltaLibri.
-   * Istanzia una lista di libri e una lista di valutazioni*/
-  public RaccoltaLibri() {
+   * Istanzia una lista di libri e una lista di valutazioni vuoti*/
+  public GestoreRaccolta() {
     elenco = new LinkedList<>();
     valutazioni = new LinkedList<>();
   }
@@ -23,22 +23,22 @@ public class RaccoltaLibri {
   /**
    * Setta il valore in input.
    * @param elenco List<Libro> */
-  public RaccoltaLibri(List<Libro> elenco) {
+  public GestoreRaccolta(List<Libro> elenco) {
     this.elenco = elenco;
   }
 
   /**
-   * Reperisce la lista di libri.
+   * Restituisce la lista di libri.
    * @return String*/
   public List<Libro> getElenco() { return elenco; }
 
 
   /**
-   * Preleva i dati dei libri e delle valutazioni tramite la classeCSVFileManager
+   * Preleva i dati dei libri e delle valutazioni tramite la classe CSVFileManager
    */
-  public void caricaDati() {
-    elenco = CSVFileManager.leggiDatiCsv("./data/Libri.dati.csv", Libro.class);
-    valutazioni = CSVFileManager.leggiDatiCsv("./data/ValutazioniLibri.dati.csv", Valutazione.class);
+  public void caricaDati(String pathLibri, String pathValutazioni) {
+    elenco = CSVFileManager.leggiDatiCsv(pathLibri, Libro.class);
+    valutazioni = CSVFileManager.leggiDatiCsv(pathValutazioni, Valutazione.class);
   }
 
 /**

@@ -1,5 +1,4 @@
-import controller.GestoreRaccolta;
-import model.RaccoltaLibri;
+import controller.Controller;
 
 /**
  * La classe Main istanzia un oggetto di tipo RaccoltaLibri, per la gestione dei libri, e un oggetto di tipo GestoreRaccolta, che richiama il
@@ -12,9 +11,7 @@ public class Main {
 
 
     // inizializzazione gestore della raccolta locale
-    RaccoltaLibri raccolta = new RaccoltaLibri();
-    GestoreRaccolta manager = new GestoreRaccolta(raccolta);
-
+    Controller manager = new Controller();
 
 
     System.out.println("\n\n\n\t (\\¯¯¯¯¯¯¯¯\\");

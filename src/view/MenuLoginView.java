@@ -15,7 +15,6 @@ public class MenuLoginView {
     System.out.print("╠ Password: \n╠ >> ");
     String password = scanner.nextLine();
 
-
     return new Utente("","","","", userId, password);
 
   }
