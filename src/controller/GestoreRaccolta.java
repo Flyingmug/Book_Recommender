@@ -58,9 +58,9 @@ public class GestoreRaccolta {
           break;
         case "r":
           if (sessione.getUtenteCorrente() != null)
-            iniziaRegistrazione();
+            Feedback.warn("L'utente ha già eseguito l'accesso");
           else
-            Feedback.warn("");
+            iniziaRegistrazione();
           break;
         case "l":
           iniziaLogin();
@@ -69,6 +69,10 @@ public class GestoreRaccolta {
           System.out.println("\n\t╠═══════ Accesso ═══════╣\n\n");
 
 
+          break;
+        case "o":
+          sessione.esci();
+          Feedback.success("Utente disconnesso");
           break;
         case "e":
           uscita = true;
@@ -175,6 +179,7 @@ public class GestoreRaccolta {
 
           case "e":
             uscitaPaginaRisultati = true;
+            break;
 
           default:
             if (Utils.isInteger(sceltaOpzionePagina)) {
@@ -205,7 +210,9 @@ public class GestoreRaccolta {
 
       String scelta = DisplayLibroView.display(l, valMedia);
       if (scelta.equalsIgnoreCase("c")) {
-
+        System.out.println("Placeholder");
+        System.out.println("Placeholder");  // mostra consigli di libri
+        System.out.println("Placeholder");
       } else {
         uscitaPaginaLibro = true;
       }
@@ -223,7 +230,7 @@ public class GestoreRaccolta {
     /*il menu al momento non restituisce nulli*/
     if (u != null)
       try {
-        sessione.Registra(u);
+        sessione.registra(u);
       } catch (RuntimeException e) {
         Feedback.err(e.getMessage());
       } finally {
@@ -237,10 +244,12 @@ public class GestoreRaccolta {
  * Semplice stampa a video per indicare la selezione dell'operazione di "login"*/
   void iniziaLogin() {
     Utente u = MenuLoginView.display();
-    sessione.Accedi(u.getUserId(), u.getPassword());
+    sessione.accedi(u.getUserId(), u.getPassword());
     Utente uCorr = sessione.getUtenteCorrente();
     if (uCorr != null) {
       Feedback.success("Accesso eseguito, benvenuto " + uCorr.getUserId());
+    } else {
+      Feedback.warn("Utente non registrato");
     }
   }
 

@@ -37,7 +37,7 @@ public class MenuPaginamentoRisultatiView {
         int cifreNumOcc = String.valueOf(numOccorrenze).length();
 
         // informazioni sulla ricerca
-        System.out.println("\n═════════════════════════════════");
+        System.out.println("\n════════════════════════════════════");
         System.out.println("  Pagina "+gr+(indicePaginaCorrente+1)+rs+" di "+numeroPagine+" ("+numOccorrenze+" risultati)\n");
         System.out.println("╔ Titolo, Autori, Anno di pubblicazione");
 

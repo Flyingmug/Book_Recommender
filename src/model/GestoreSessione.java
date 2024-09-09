@@ -28,14 +28,18 @@ public class GestoreSessione {
     return utenteCorrente;
   }
 
-  public void Accedi(String userId, String password) {
+  public void accedi(String userId, String password) {
     Utente u = cercaUtente(userId, password);
     if (u != null) {
       utenteCorrente = u;
     }
   }
 
-  public void Registra(Utente u)
+  public void esci() {
+    utenteCorrente = null;
+  }
+
+  public void registra(Utente u)
       throws UserIdUnavailableException {
 
     Utente utenteRis = cercaUtente(u.getUserId(), u.getPassword());
