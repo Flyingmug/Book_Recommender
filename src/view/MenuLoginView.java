@@ -11,8 +11,9 @@ public class MenuLoginView {
   final static Scanner scanner = new Scanner(System.in);
 
   /**
-   *
-   * @return Utente
+   * Mostra il menu di login e restituisce un oggetto {@link Utente}
+   * con solo i campi idUtente e password assegnati.
+   * @return utente
    */
   public static Utente display() {
     System.out.println("\n\t╠═══════ Login ═══════╣\n");

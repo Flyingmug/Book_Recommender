@@ -492,7 +492,7 @@ public class Controller {
     sessione.accedi(u.getUserId(), u.getPassword());
     Utente uCorr = sessione.getUtenteCorrente();
     if (uCorr != null) {
-      Feedback.success("Accesso eseguito, benvenuto " + uCorr.getUserId());
+      Feedback.success("Accesso eseguito, benvenuto " + uCorr.getNome());
     } else {
       Feedback.warn("Utente non registrato");
     }

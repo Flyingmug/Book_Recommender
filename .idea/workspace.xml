@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="commits on model">
+    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="fixed search bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utilities/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/CSVFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CSVFileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuRicercaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuRicercaView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MenuLoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuLoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725991109951</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fixed search bug">
+      <option name="closed" value="true" />
+      <created>1725992101750</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1725992101750</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -235,7 +243,8 @@
     <MESSAGE value="commits on controller and some menus" />
     <MESSAGE value="commits on CSVFileManager" />
     <MESSAGE value="commits on model" />
-    <option name="LAST_COMMIT_MESSAGE" value="commits on model" />
+    <MESSAGE value="fixed search bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed search bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -244,11 +253,6 @@
           <url>file://$PROJECT_DIR$/src/controller/Controller.java</url>
           <line>116</line>
           <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/model/CSVFileManager.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
