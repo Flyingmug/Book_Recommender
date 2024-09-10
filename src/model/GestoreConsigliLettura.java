@@ -33,7 +33,7 @@ public class GestoreConsigliLettura {
   /**
    * Restituisce tutti i libri consigliati al parametro l
    * @param l Libro
-   * @return una lista di Libri
+   * @return List<Libro>
    */
   public List<Libro> cercaConsigliLibro(List<Libro> raccolta, Libro l) {
     // ottieni consigli associati a un libro
@@ -57,6 +57,10 @@ public class GestoreConsigliLettura {
     return libri;
   }
 
+  /**
+   *
+   * @param c ConsiglioLettura
+   */
   public void aggiungi(ConsiglioLettura c) {
     List<ConsiglioLettura> list = new LinkedList<>();
     list.add(c);
@@ -64,6 +68,12 @@ public class GestoreConsigliLettura {
     elencoConsigli.add(c);
   }
 
+  /**
+   *
+   * @param idUtente String
+   * @param idLibro String
+   * @return boolean
+   */
   public boolean consigliUtenteCompleti(String idUtente, String idLibro) {
     return elencoConsigli.stream().filter(x -> x.getIdUtente().equals(idUtente)
         && x.getIdLibro().equals(idLibro)).toList().getFirst().getConsigli().length >= 3;

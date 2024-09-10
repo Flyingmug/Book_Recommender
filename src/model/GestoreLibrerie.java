@@ -13,14 +13,25 @@ public class GestoreLibrerie {
   List<Libreria> librerie;
   String path_librerie;
 
+  /**
+   *
+   * @param path_librerie String
+   */
   public GestoreLibrerie(String path_librerie) {
     this.path_librerie = path_librerie;
   }
 
 
-
+  /**
+   *
+   * @return List<Libreria>
+   */
   public List<Libreria> getLibrerie() { return librerie; }
 
+  /**
+   * @param userId String
+   * @param raccoltaTotale List<Libro>
+   */
   public void caricaDatiLibrerie(String userId, List<Libro> raccoltaTotale) {
     /*librerie = new LinkedList<>();
 
@@ -115,6 +126,11 @@ public class GestoreLibrerie {
 
   }
 
+  /**
+   *
+   * @param l Libreria
+   * @param idUtente String
+   */
   public void registraLibreria(Libreria l, String idUtente) {
     List<EntryLibreria> entries = new LinkedList<>();
     for (Libro libro: l.getElencoLibri()) {
@@ -124,6 +140,11 @@ public class GestoreLibrerie {
     CSVFileManager.scriviDatiCsv(path_librerie, entries, true);
   }
 
+  /**
+   *
+   * @param indice int
+   * @param idUtente String
+   */
   public void elimina(int indice, String idUtente) {
     Libreria libRimossa = librerie.remove(indice);
     List<EntryLibreria> entries = CSVFileManager.leggiDatiCsv(path_librerie, EntryLibreria.class);

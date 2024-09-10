@@ -123,10 +123,9 @@ public class CSVFileManager {
 
   /**
    *
-   * @param filePath
-   * @param recordsList
-   * @param appendMode
-   * @param <T>
+   * @param filePath String
+   * @param recordsList List<T>
+   * @param appendMode boolean
    */
   public static <T> void scriviDatiCsv(String filePath, List<T> recordsList, boolean appendMode) {
 
@@ -178,9 +177,8 @@ public class CSVFileManager {
 
   /**
    *
-   * @param classe
-   * @return
-   * @param <T>
+   * @param classe Class<T>
+   * @return String[]
    * @throws UnknownClassException
    */
   private static <T> String[] getHeaders(Class<T> classe) throws UnknownClassException {
@@ -202,8 +200,8 @@ public class CSVFileManager {
 
   /**
    *
-   * @param record
-   * @return
+   * @param record Object
+   * @return Iterable<?>
    */
   private static Iterable<?> convertToCsvRecord(Object record) {
     if (record instanceof Utente user) {
@@ -225,9 +223,9 @@ public class CSVFileManager {
 
   /**
    *
-   * @param file
-   * @param classe
-   * @return
+   * @param file File
+   * @param classe Class<?>
+   * @return boolean
    */
   private static boolean hasHeaders(File file, Class<?> classe) {
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

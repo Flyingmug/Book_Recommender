@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="Miglioramenti alla registrazione">
+    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="Completamento suggerimenti e valutazioni">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utilities/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuRegistrazioneView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuRegistrazioneView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/CSVFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CSVFileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ConsiglioLettura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ConsiglioLettura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/EntryLibreria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/EntryLibreria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GestoreConsigliLettura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreConsigliLettura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GestoreLibrerie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreLibrerie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="aa7ba042aec974a44b9b62c4fb62d7b0235db1a0" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -174,15 +179,7 @@
       <option name="project" value="LOCAL" />
       <updated>1725942262139</updated>
     </task>
-    <task id="LOCAL-00012" summary="Full functionalities">
-      <option name="closed" value="true" />
-      <created>1725977735819</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1725977735819</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,9 +203,7 @@
     <MESSAGE value="Miglioramenti generali di nuovo" />
     <MESSAGE value="creazione e aggiunta di libri alle librerie" />
     <MESSAGE value="Completamento suggerimenti e valutazioni" />
-    <MESSAGE value="Full functionalities" />
-    <MESSAGE value="Miglioramenti alla registrazione" />
-    <option name="LAST_COMMIT_MESSAGE" value="Miglioramenti alla registrazione" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completamento suggerimenti e valutazioni" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

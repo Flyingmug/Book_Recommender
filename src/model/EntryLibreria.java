@@ -12,10 +12,10 @@ public class EntryLibreria {
 
   /**
    * Costruttore classe EntryLibreria.
-   * @param idUtente
-   * @param idLibreria
-   * @param nomeLibreria
-   * @param idLibro
+   * @param idUtente String
+   * @param idLibreria String
+   * @param nomeLibreria String
+   * @param idLibro String
    */
   public EntryLibreria(String idUtente, String idLibreria, String nomeLibreria, String idLibro) {
     this.idUtente = idUtente;
@@ -25,19 +25,19 @@ public class EntryLibreria {
   }
 
   /**
-   * @return
+   * @return String
    */
   public String getIdUtente() { return idUtente; }
   /**
-   * @return
+   * @return String
    */
   public String getIdLibreria() { return idLibreria; }
   /**
-   * @return
+   * @return String
    */
   public String getNomeLibreria() {  return nomeLibreria; }
   /**
-   * @return
+   * @return String
    */
   public String getIdLibro() { return idLibro; }
 
