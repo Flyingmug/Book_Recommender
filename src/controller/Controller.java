@@ -5,6 +5,7 @@ import model.*;
 import Utilities.Feedback;
 import view.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -91,40 +92,41 @@ public class Controller {
   }
 
 
+
 /**
 * Metodo utilizzato per ricercare il libro richiesto dall'utente, in base ai vari criteri quali:
 * Titolo
 * Autore
 * Autore e anno
  * */
-  void iniziaRicerca(GestoreRaccolta raccoltaLibri, ModalitaAccesso modalita, RichiestaRicerca richiestaIniziale) {
+  List<Libro> iniziaRicerca(GestoreRaccolta raccoltaLibri, ModalitaAccesso modalita, RichiestaRicerca richiesta) {
 
     boolean richiestaNuovaRicerca;
+    List<Libro> idLibriSelezionati = new LinkedList<>();
 
     do {
-      RichiestaRicerca req;
+      // Verifica la presenza di una richiesta iniziale
+      if (richiesta != null) {
+        List<Libro> risultati = raccoltaLibri.cercaLibro(richiesta);
 
-      // verifica se vi è una richiesta di ricerca iniziale
-      if (richiestaIniziale == null) {
+        // mostra risultati di ricerca
+        richiestaNuovaRicerca = iniziaPaginazioneRisultati(risultati, richiesta.getCriterio(), modalita, idLibriSelezionati);
 
-        req = MenuCriterioRicercaView.display();
-        if (req == null) return;
-
+        richiesta = null;
       } else {
-        // utilizza la richiesta iniziale
-        req = richiestaIniziale;
+        // Richiedi nuova chiave e criterio
+        richiesta = MenuRicercaView.display();
+        if (richiesta == null) return null;
+        richiestaNuovaRicerca = true;
       }
-
-      // Cerca dalla raccolta
-      List<Libro> risultati = raccoltaLibri.cercaLibro(req);
-
-      // visualizzazione pagine dei risultati
-      richiestaNuovaRicerca = iniziaPaginazioneRisultati(risultati, req.getCriterio(), modalita);
 
     } while (richiestaNuovaRicerca);
 
+    if (modalita.equals(ModalitaAccesso.ADDING)) {
+      return idLibriSelezionati;
+    }
+    return null;
   }
-
 
 
 
@@ -133,7 +135,7 @@ public class Controller {
  * @param risultati RaccoltaLibri
  * @param criterio CriterioRicerca
  * @return true per una nuova richiesta di ricerca, false per richiedere di uscire */
-  boolean iniziaPaginazioneRisultati(List<Libro> risultati, CriterioRicerca criterio, ModalitaAccesso editing) {
+  boolean iniziaPaginazioneRisultati(List<Libro> risultati, CriterioRicerca criterio, ModalitaAccesso modalita, List<Libro> idLibriSelezionati) {
     String sceltaOpzionePagina;
     int indicePaginaCorrente = 0;
     int numOccorrenze = risultati.size();
@@ -168,15 +170,19 @@ public class Controller {
             break;
           case "c":
             return true;
-
           case "e":
             return false;
-
           default:
-            if (Utils.isInteger(sceltaOpzionePagina)) {
+
+            // aggiunta di libri alla libreria
+             if (Utils.isInteger(sceltaOpzionePagina)) {
               // visualizzazione dati di un libro
               int indice = Integer.parseInt(sceltaOpzionePagina);
-              if (indice > 0 && indice <= numOccorrenze) {
+               if (modalita.equals(ModalitaAccesso.ADDING)) {
+                 idLibriSelezionati.add(risultati.get(indice));
+                 Feedback.info("Libro selezionato");
+
+               } else if (indice > 0 && indice <= numOccorrenze) {
                 visualizzaLibro(risultati.get(indice));
               } else
                 Feedback.warn("Indice selezionato non valido");
@@ -248,9 +254,15 @@ public class Controller {
       switch (sceltaOperazioneLibreria.toLowerCase()) {
         case "n":
           Libreria lib = MenuLibreriePersonali.displayCreazione();
-          if (!libreriePersonali.getLibrerie().contains(lib))
+          if (!libreriePersonali.getLibrerie().contains(lib)) {
+
+            Feedback.info("Seleziona i libri da aggiungere alla libreria");
+            List<Libro> selezioni = iniziaRicerca(raccolta, ModalitaAccesso.ADDING, null);
+            lib.aggiungiListaLibri(selezioni);
             libreriePersonali.registraLibreria(lib, idUtenteCorrente);
-          else
+            numOccorrenze++;
+            Feedback.success("Libreria creata.");
+          } else
             Feedback.warn("La libreria " + lib.getNomeLibreria() + " è già presente");
           break;
 

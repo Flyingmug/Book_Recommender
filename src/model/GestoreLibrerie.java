@@ -116,10 +116,11 @@ public class GestoreLibrerie {
   }
 
   public void registraLibreria(Libreria l, String idUtente) {
-
-    librerie.add(l);
     List<EntryLibreria> entries = new LinkedList<>();
-    entries.add(new EntryLibreria(idUtente, l.getIdLibreria(), l.getNomeLibreria(), "NULL"));
+    for (Libro libro: l.getElencoLibri()) {
+      entries.add(new EntryLibreria(idUtente, l.getIdLibreria(), l.getNomeLibreria(), libro.getIdLibro()));
+    }
+    librerie.add(l);
     CSVFileManager.scriviDatiCsv(path_librerie, entries, true);
   }
 

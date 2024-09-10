@@ -2,5 +2,6 @@ package model;
 
 public enum ModalitaAccesso {
   READING,
-  OPERATING
+  OPERATING,
+  ADDING
 }

@@ -38,6 +38,12 @@ public class Libreria {
     }
   }
 
+  public void aggiungiListaLibri(List<Libro> lista) {
+    if (!lista.isEmpty()) {
+      elenco.addAll(lista);
+    }
+  }
+
   /**
    *
    * @param obj

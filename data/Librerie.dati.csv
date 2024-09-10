@@ -1,5 +1,10 @@
 IdUtente,IdLibreria,Nome Libreria,IdLibro
-x,726ee9ba-47e2-49e9-9ed2-8dff0a0b1a41,Bondman,NULL
 x,f97ba6b0-69a5-4e3d-bf7f-9c19db791f70,bondman,NULL
 x,04b423c2-a825-42d6-b891-4f754022fade,Bondman 2,NULL
 x,17e0e8cf-aec8-42f6-b542-0c242adbf883,BondBond,NULL
+y,07cec284-7fcd-4b07-8a85-ff0134c0b365,Good books,NULL
+y,8d7d74b6-937d-470e-a3c6-d2264359eeea,some library,NULL
+y,e02009b7-9dce-49e3-b354-897980eb8167,weird books,NULL
+x,b71d2460-fe61-48b9-ad02-96593b60f9bf,BondBondBond,NULL
+x,4840cb87-eac2-40d8-a623-00070d100ef7,Bondman,NULL
+x,b67053d7-f161-4dc4-84dc-5171fa3879b2,Bondman3,edd754d2-2a9f-44f7-91e1-7ad25c4e5565
