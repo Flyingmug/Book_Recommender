@@ -1,10 +1,8 @@
 package view;
 
-import model.ConsiglioLettura;
-
 public class MenuConsigliLetturaView {
 
-  public static void display() {
+  public static void displayInserimento() {
 
     System.out.println("\n ╠══ Seleziona libri da consigliare (massimo 3) ══╣ ");
 

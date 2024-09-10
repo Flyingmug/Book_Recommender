@@ -60,7 +60,7 @@ public class Controller {
 
       switch (scelta.toLowerCase()) {
         case "c":
-          iniziaRicerca(raccolta, ModalitaAccesso.READING, null);
+          iniziaRicerca(raccolta, ModalitaAccesso.READING, null, "Risultati");
           break;
         case "r":
           if (accessoEseguito)
@@ -103,7 +103,8 @@ public class Controller {
 * Autore
 * Autore e anno
  * */
-  List<Libro> iniziaRicerca(GestoreRaccolta raccoltaLibri, ModalitaAccesso modalita, RichiestaRicerca richiesta) {
+  List<Libro> iniziaRicerca(GestoreRaccolta raccoltaLibri, ModalitaAccesso modalita,
+                            RichiestaRicerca richiesta, String titoloPagina) {
 
     boolean richiestaNuovaRicerca;
     List<Libro> libriSelezionati = new LinkedList<>();
@@ -114,7 +115,7 @@ public class Controller {
         List<Libro> risultati = raccoltaLibri.cercaLibro(richiesta);
 
         // mostra risultati di ricerca
-        richiestaNuovaRicerca = iniziaPaginazioneRisultati(risultati, richiesta.getCriterio(), modalita, libriSelezionati);
+        richiestaNuovaRicerca = iniziaPaginazioneRisultati(risultati, richiesta.getCriterio(), modalita, libriSelezionati, titoloPagina);
 
         richiesta = null;
       } else {
@@ -142,16 +143,16 @@ public class Controller {
  * @param risultati RaccoltaLibri
  * @param criterio CriterioRicerca
  * @return true per una nuova richiesta di ricerca, false per richiedere di uscire */
-  boolean iniziaPaginazioneRisultati(List<Libro> risultati, CriterioRicerca criterio, ModalitaAccesso modalita, List<Libro> libriSelezionati) {
+  boolean iniziaPaginazioneRisultati(List<Libro> risultati, CriterioRicerca criterio, ModalitaAccesso modalita, List<Libro> libriSelezionati, String titoloPagina) {
     String sceltaOpzionePagina;
     int indicePaginaCorrente = 0;
     int numOccorrenze = risultati.size();
     int numeroPagine = (int) Math.max(1, Math.ceil((double) numOccorrenze/DIM_PAGINA));
 
     do {
-      List<Libro> paginaRisultati = GestoreRaccolta.sottoRaccolta(risultati, indicePaginaCorrente*DIM_PAGINA, DIM_PAGINA);
+      List<Libro> paginaRisultati = Utils.listSection(risultati, indicePaginaCorrente*DIM_PAGINA, DIM_PAGINA);
 
-      sceltaOpzionePagina = MenuPaginamentoRisultatiView.display(paginaRisultati, indicePaginaCorrente, numOccorrenze, numeroPagine, DIM_PAGINA, criterio);
+      sceltaOpzionePagina = MenuPaginamentoRisultatiView.display(paginaRisultati, indicePaginaCorrente, numOccorrenze, numeroPagine, DIM_PAGINA, criterio, titoloPagina);
 
 
         // verifica opzione selezionata
@@ -225,7 +226,7 @@ public class Controller {
     boolean uscitaPaginaLibro = false;
     do {
 
-      String scelta = DisplayLibroView.display(l, valMedia, modalita);
+      String scelta = DisplayLibroView.display(l, valMedia, valutazioni.count(),  modalita);
       switch (scelta.toLowerCase()) {
         case "s":
           if (modalita.equals(ModalitaAccesso.OPERATING)) {
@@ -247,16 +248,15 @@ public class Controller {
             }
           }
           break;
+        case "r":
+          visualizzaRecensioni(l);
+        case "c":
+          visualizzaConsigli(l);
         case "e":
+          uscitaPaginaLibro = true;
           break;
-      }
-
-      if (scelta.equalsIgnoreCase("c")) {
-        System.out.println("Placeholder");
-        System.out.println("Placeholder");  // mostra consigli di libri
-        System.out.println("Placeholder");
-      } else {
-        uscitaPaginaLibro = true;
+        default:
+          break;
       }
 
     } while(!uscitaPaginaLibro);
@@ -275,8 +275,8 @@ public class Controller {
 
   void inserisciSuggerimentoLibro(Libro l) {
 
-    MenuConsigliLetturaView.display();
-    List<Libro> libriSelezionati = iniziaRicerca(raccolta, ModalitaAccesso.LIMITED_SELECTING, null);
+    MenuConsigliLetturaView.displayInserimento();
+    List<Libro> libriSelezionati = iniziaRicerca(raccolta, ModalitaAccesso.LIMITED_SELECTING, null, "Libri da suggerire");
     if (!libriSelezionati.isEmpty()) {
       // estrazione id libri
       String[] idLibri = new String[SELECTION_LIMIT];
@@ -297,6 +297,46 @@ public class Controller {
       Feedback.warn("Non sono stati selezionati consigli");
   }
 
+  void visualizzaConsigli(Libro l) {
+
+    List<Libro> risultatoConsigli = consigliLettura.cercaConsigliLibro(raccolta.getElenco(), l);
+    RichiestaRicerca richiestaVuota = new RichiestaRicerca("", "", 0, CriterioRicerca.TITOLO);
+    GestoreRaccolta raccoltaCons = new GestoreRaccolta(risultatoConsigli);
+    iniziaRicerca(raccoltaCons, ModalitaAccesso.READING, richiestaVuota, "Libri Consigliati");
+
+  }
+
+  void visualizzaRecensioni(Libro l) {
+
+    List<Valutazione> valutazioniLibro = valutazioni.cercaValutazioni(l);
+    boolean uscitaRecensioni = false;
+    String scelta;
+    int indiceCorrente = 0;
+    int numOccorrenze = valutazioniLibro.size();
+    List<Valutazione> recensioniParziali = new LinkedList<>();
+
+    do {
+      try {
+        recensioniParziali = Utils.listSection(valutazioniLibro, indiceCorrente, 3);
+      } catch (IllegalArgumentException e) {
+        uscitaRecensioni = true;
+      }
+
+      scelta = MenuRecensioniView.display(recensioniParziali);
+      switch (scelta) {
+        case "a":
+          if (indiceCorrente + 3 < numOccorrenze) indiceCorrente += 3;
+          break;
+        case "e":
+          uscitaRecensioni = true;
+        default:
+          Feedback.warn("Opzione inesistente");
+          break;
+      }
+
+    } while (!uscitaRecensioni);
+
+  }
 
 
   void iniziaGestioneLibrerie() {
@@ -308,10 +348,7 @@ public class Controller {
 
     String sceltaOperazioneLibreria;
     boolean uscitaGestioneLibrerie = false;
-    int indicePaginaCorrente = 0;
     int numOccorrenze = libreriePersonali.getLibrerie().size();
-    int numeroPagine = (int) Math.max(1, Math.ceil((double) numOccorrenze/DIM_PAGINA));
-
 
     do {
       // aggiungere paginazione delle librerie o limite di librerie per utente
@@ -319,11 +356,12 @@ public class Controller {
 
       switch (sceltaOperazioneLibreria.toLowerCase()) {
         case "n":
+          // nuova libreria
           Libreria lib = MenuLibreriePersonali.displayCreazione();
           if (!libreriePersonali.getLibrerie().contains(lib)) {
 
             Feedback.info("Seleziona i libri da aggiungere alla libreria");
-            List<Libro> selezioni = iniziaRicerca(raccolta, ModalitaAccesso.SELECTING, null);
+            List<Libro> selezioni = iniziaRicerca(raccolta, ModalitaAccesso.SELECTING, null, "Seleziona libri");
             lib.aggiungiListaLibri(selezioni);
             libreriePersonali.registraLibreria(lib, idUtenteCorrente);
             numOccorrenze++;
@@ -333,6 +371,7 @@ public class Controller {
           break;
 
         case "r":
+          // rimuovi libreria
           String indiceEliminazione = MenuLibreriePersonali.displayEliminazione();
           if (Utils.isInteger(indiceEliminazione)) {
             // visualizzazione dati di un libro
@@ -377,7 +416,7 @@ public class Controller {
         new RichiestaRicerca("", "", 0, CriterioRicerca.TITOLO);
 
     GestoreRaccolta raccoltaParziale = new GestoreRaccolta(libreria.getElencoLibri());
-    iniziaRicerca(raccoltaParziale, ModalitaAccesso.OPERATING, richiestaInit);
+    iniziaRicerca(raccoltaParziale, ModalitaAccesso.OPERATING, richiestaInit, "Libreria " + libreria.getNomeLibreria());
 
   }
 

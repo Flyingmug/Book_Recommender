@@ -20,18 +20,20 @@ public class DisplayLibroView {
   final static String gr = ColoriConsole.GREEN;
   final static String pr = ColoriConsole.PURPLE;
   final static String yb = ColoriConsole.YELLOW_BOLD;
+  final static String wb = ColoriConsole.WHITE_BOLD;
+
 
   final static Scanner scanner = new Scanner(System.in);
 
   /**
-   * Visualizzazione video
+   * Visualizzazione pagina dedicata al libro l
    *
-   * @param l
-   * @param valMedia
-   * @param modalita
+   * @param l libro da visualizzare
+   * @param valMedia valutazione media del libro
+   * @param modalita modalita' di accesso
    * @return String
    */
-  public static String display(Libro l, Valutazione valMedia, ModalitaAccesso modalita) {
+  public static String display(Libro l, Valutazione valMedia, int totaleValutazioni, ModalitaAccesso modalita) {
 
     String editore = l.getEditore();
     String categorie = l.getCategorie();
@@ -49,6 +51,7 @@ public class DisplayLibroView {
 
     System.out.println("║\t════╣ "+cy+"Valutazione media"+rs+" ╠════\n║╠");
     if (valMedia.getVotoFinale() > 0) {
+      System.out.println("║╠ " +wb+ totaleValutazioni + " total" + (totaleValutazioni>1?'i':'e')+rs);
       System.out.println("║╠ Voto Finale   " + yb + indicatore.repeat(valMedia.getVotoFinale()) + rs);
       System.out.println("║╠ Stile         " + yb + indicatore.repeat(valMedia.getStile()) + rs);
       System.out.println("║╠ Contenuto     " + yb + indicatore.repeat(valMedia.getContenuto()) + rs);
@@ -60,8 +63,11 @@ public class DisplayLibroView {
     }
     System.out.println("╩╩");
 
+    // opzioni base
     System.out.println("\n ["+gr+"E"+rs+"]sci");
-
+    System.out.println(" ["+gr+"C"+rs+"]onsigli di lettura");
+    System.out.println(" ["+gr+"R"+rs+"]recensioni degli utenti");
+    // opzioni di modifica
     if (modalita.equals(ModalitaAccesso.OPERATING)) {
       System.out.println(" ["+pr+"V"+rs+"]aluta il libro");
       System.out.println(" ["+pr+"S"+rs+"]uggerisci libri (Max 3)");

@@ -30,6 +30,9 @@ public class GestoreValutazioni {
     valutazioni = CSVFileManager.leggiDatiCsv(pathValutazioni, Valutazione.class);
   }
 
+  public int count() {
+    return valutazioni.size();
+  }
 
   /**
    * Restituisce tutte le valutazioni con l'idLibro corrispondente al parametro
@@ -68,5 +71,10 @@ public class GestoreValutazioni {
 
   int calcolaMediaValutazione(List<Valutazione> lista, ToIntFunction<Valutazione> metodo) {
     return (int) lista.stream().mapToInt(metodo).average().orElse(0);
+  }
+
+  public List<String> getRecensioni(Libro l) {
+    List<Valutazione> valutazioni = cercaValutazioni(l);
+    return valutazioni.stream().map(Valutazione::getRecensione).toList();
   }
 }

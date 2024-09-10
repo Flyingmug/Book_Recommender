@@ -79,16 +79,4 @@ public class GestoreRaccolta {
     return risultato;
   }
 
-  /**
-   * Metodo utilizzato per ottenere un sottoinsieme di una lista di libri.
-   * Viene usato nella paginazione dei risultati, per mostrare solo X libri alla volta.
-   * @param elenco List<Libro>
-   * @param salto int
-   * @param limite int
-   * @return List<Libro>
-   */
-  public static List<Libro> sottoRaccolta(List<Libro> elenco, int salto, int limite) {
-    return elenco.subList(salto, Math.min(salto + limite, elenco.size()));
-  }
-
 }
