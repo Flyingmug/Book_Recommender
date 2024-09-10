@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="small fixes">
+    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="file management">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ConsigliLibri.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temp/ConsigliLibri.dati.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Librerie.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temp/Librerie.dati.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temp/UtentiRegistrati.dati.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/ValutazioniLibri.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temp/ValutazioniLibri.dati.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ConsigliLibri.dati.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Librerie.dati.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ValutazioniLibri.dati.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/CSVFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CSVFileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -235,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726010580258</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="file management">
+      <option name="closed" value="true" />
+      <created>1726011616223</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1726011616223</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -265,6 +273,7 @@
     <MESSAGE value="commits on model" />
     <MESSAGE value="fixed search bug" />
     <MESSAGE value="small fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="small fixes" />
+    <MESSAGE value="file management" />
+    <option name="LAST_COMMIT_MESSAGE" value="file management" />
   </component>
 </project>
