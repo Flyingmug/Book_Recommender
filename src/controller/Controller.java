@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * La classe Controller viene utilizzata per avviare il programma e presentare il menu' con le funzionalita' all'utente
+ * La classe Controller viene utilizzata per avviare il programma
+ * e presentare il menu' con le funzionalita' all'utente
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
 public class Controller {
@@ -30,7 +31,12 @@ public class Controller {
   final int SELECTION_LIMIT = 3;
 
   /**
-   * Costruttore Controller del sistema */
+   * Costruttore Controller del sistema. Inizializza i gestori delle funzionalita'.
+   * {@link GestoreRaccolta}
+   * {@link GestoreSessione}
+   * {@link GestoreValutazioni}
+   * {@link GestoreConsigliLettura}
+   */
   public Controller() {
     raccolta = new GestoreRaccolta(path_libri);
     sessione = new GestoreSessione(path_utenti_registrati);
@@ -39,9 +45,9 @@ public class Controller {
     scanner = new Scanner(System.in);
   }
 
-/**
- * Metodo che riceve in input l'operazione desiderata dall'utente.
- * Richiama il metodo che gestisce l'operazione corrispondente.*/
+  /**
+  * Gestisce il ciclo di vita del sistema.
+  * Preso un input, richiama il metodo che gestisce l'operazione corrispondente.*/
   public void iniziaCicloPrincipale() {
     // costanti -> NOTA: la dimensione deve essere maggiore di 0
 
@@ -97,12 +103,14 @@ public class Controller {
 
 
 
-/**
-* Metodo utilizzato per ricercare il libro richiesto dall'utente, in base ai vari criteri quali:
-* Titolo
-* Autore
-* Autore e anno
- * */
+  /**
+  * Metodo utilizzato per iniziare un ciclo di ricerca sulla {@code raccoltaLibri}, in base ai criteri:
+  * Titolo, Autore, Autore e anno
+   * @param raccoltaLibri raccolta di ricerca
+   * @param modalita modalita di accesso al menu dei risultati
+   * @param richiesta richiesta di ricerca, comprendente chiavi e criterio di ricerca
+   * @param titoloPagina titolo della pagina di risultati
+   * */
   List<Libro> iniziaRicerca(GestoreRaccolta raccoltaLibri, ModalitaAccesso modalita,
                             RichiestaRicerca richiesta, String titoloPagina) {
 
@@ -139,8 +147,10 @@ public class Controller {
 
 
 /**
- * Metodo che mostra i risultati di ricerca (libri) sotto forma di pagine tra cui scorrere
- * @param risultati RaccoltaLibri
+ * Gestisce la visualizzazione dei risultati di ricerca (libri)
+ * sotto forma di pagine tra cui poter scorrere.
+ * I comandi variano in base alla {@code modalita}.
+ * @param risultati libri da visualizzare
  * @param criterio CriterioRicerca
  * @return true per una nuova richiesta di ricerca, false per richiedere di uscire */
   boolean iniziaPaginazioneRisultati(List<Libro> risultati, CriterioRicerca criterio, ModalitaAccesso modalita, List<Libro> libriSelezionati, String titoloPagina) {
@@ -216,9 +226,9 @@ public class Controller {
 
 
 
-/**
- * Metodo utilizzato per stampare a video il/i libro/i richiesto (tramite classe DisplayLibroView)
- * @param l Libro*/
+  /**
+   * Metodo utilizzato per mostrare i dati del libro richiesto (tramite classe {@link DisplayLibroView}
+   * @param l Libro*/
   void visualizzaLibro(Libro l, ModalitaAccesso modalita) {
 
     Valutazione valMedia = valutazioni.valutazioneMedia(l);
@@ -230,22 +240,12 @@ public class Controller {
       switch (scelta.toLowerCase()) {
         case "s":
           if (modalita.equals(ModalitaAccesso.OPERATING)) {
-            if (!consigliLettura.consigliUtenteCompleti(sessione.getUtenteCorrente().getUserId(), l.getIdLibro())) {
-              inserisciSuggerimentoLibro(l);
-              Feedback.success("Suggerimento inserito");
-            } else {
-              Feedback.warn("Sono già stati inseriti 3 consigli per questo libro");
-            }
+            inserisciSuggerimentoLibro(l);
           }
           break;
         case "v":
           if (modalita.equals(ModalitaAccesso.OPERATING)) {
-            if (!valutazioni.valutazioneUtentePresente(sessione.getUtenteCorrente().getUserId(), l.getIdLibro())) {
-              inserisciValutazioneLibro(l);
-              Feedback.success("Valutazione inserita");
-            } else {
-              Feedback.warn("La valutazione per il libro è già stata inserita");
-            }
+            inserisciValutazioneLibro(l);
           }
           break;
         case "r":
@@ -262,41 +262,72 @@ public class Controller {
     } while(!uscitaPaginaLibro);
   }
 
+  /**
+   * Gestisce l'inserimento di una valutazione per un libro {@code l}
+   * @param l libro
+   */
   void inserisciValutazioneLibro(Libro l) {
 
-    Valutazione v = MenuValutazioneView.display();
-    if (v != null) {
-      v.setIdLibro(l.getIdLibro());
-      v.setIdUtente(sessione.getUtenteCorrente().getUserId());
-      valutazioni.aggiungi(v);
-    } else
-      Feedback.warn("Il valore inserito non rispetta le condizioni indicate");
+    // verifica la presenza di una recensione dell'utente per il libro
+    if (!valutazioni.valutazioneUtentePresente(sessione.getUtenteCorrente().getUserId(), l.getIdLibro())) {
+
+      Valutazione v = MenuValutazioneView.display();
+      if (v != null) {
+        v.setIdLibro(l.getIdLibro());
+        v.setIdUtente(sessione.getUtenteCorrente().getUserId());
+        valutazioni.aggiungi(v);
+        Feedback.success("Valutazione inserita");
+
+      } else
+        Feedback.warn("Il valore inserito non rispetta le condizioni indicate");
+
+    } else {
+      Feedback.warn("La valutazione per il libro è già stata inserita");
+    }
+
   }
 
+  /**
+   * Gestisce l'inserimento di suggerimenti di lettura per un libro {@code l},
+   * verificando che non venga superato il limite {@code SELECTION_LIMIT}.
+   * @param l libro
+   */
   void inserisciSuggerimentoLibro(Libro l) {
 
-    MenuConsigliLetturaView.displayInserimento();
-    List<Libro> libriSelezionati = iniziaRicerca(raccolta, ModalitaAccesso.LIMITED_SELECTING, null, "Libri da suggerire");
-    if (!libriSelezionati.isEmpty()) {
-      // estrazione id libri
-      String[] idLibri = new String[SELECTION_LIMIT];
-      for(int i = 0; i < Math.min(idLibri.length, libriSelezionati.size()); i++) {
-        idLibri[i] = libriSelezionati.get(i).getIdLibro();
-      }
-      ConsiglioLettura c = new ConsiglioLettura();
-      c.setIdLibro(l.getIdLibro());
-      c.setIdUtente(sessione.getUtenteCorrente().getUserId());
-      try {
-        c.setIdConsigli(idLibri);
-      } catch (IllegalArgumentException | NullPointerException e) {
-        Feedback.err(e.getMessage());
-      }
-      // aggiunta consiglio di lettura
-      consigliLettura.aggiungi(c);
-    } else
-      Feedback.warn("Non sono stati selezionati consigli");
+    if (!consigliLettura.consigliUtenteCompleti(sessione.getUtenteCorrente().getUserId(), l.getIdLibro())) {
+
+      MenuConsigliLetturaView.displayInserimento();
+      List<Libro> libriSelezionati = iniziaRicerca(raccolta, ModalitaAccesso.LIMITED_SELECTING, null, "Libri da suggerire");
+      if (!libriSelezionati.isEmpty()) {
+        // estrazione id libri
+        String[] idLibri = new String[SELECTION_LIMIT];
+        for(int i = 0; i < Math.min(idLibri.length, libriSelezionati.size()); i++) {
+          idLibri[i] = libriSelezionati.get(i).getIdLibro();
+        }
+        ConsiglioLettura c = new ConsiglioLettura();
+        c.setIdLibro(l.getIdLibro());
+        c.setIdUtente(sessione.getUtenteCorrente().getUserId());
+        try {
+          c.setIdConsigli(idLibri);
+        } catch (IllegalArgumentException | NullPointerException e) {
+          Feedback.err(e.getMessage());
+        }
+        // aggiunta consiglio di lettura
+        consigliLettura.aggiungi(c);
+        Feedback.success("Suggerimento inserito");
+      } else
+        Feedback.warn("Non sono stati selezionati consigli");
+
+    } else {
+      Feedback.warn("Sono già stati inseriti 3 consigli per questo libro");
+    }
+
   }
 
+  /**
+   * Gestisce la visualizzazione dei libri consigliati di un libro {@code l} tramite {@link MenuPaginamentoRisultatiView}
+   * @param l libro
+   */
   void visualizzaConsigli(Libro l) {
 
     List<Libro> risultatoConsigli = consigliLettura.cercaConsigliLibro(raccolta.getElenco(), l);
@@ -306,6 +337,10 @@ public class Controller {
 
   }
 
+  /**
+   * Consente di visualizzare le recensioni relative a un libro {@code l} tramite un menu dedicato {@link MenuRecensioniView}
+   * @param l libro
+   */
   void visualizzaRecensioni(Libro l) {
 
     List<Valutazione> valutazioniLibro = valutazioni.cercaValutazioni(l);
@@ -338,7 +373,11 @@ public class Controller {
 
   }
 
-
+  /**
+   * Inizializza la pagina di gestione delle librerie personali associate all'utente corrente.
+   * Gestisce le operazioni sulla libreria: Creazione, Eliminazione, Visualizzazione.
+   * La visualizzazione avviene tramite {@link MenuLibreriePersonali}
+   */
   void iniziaGestioneLibrerie() {
 
     String idUtenteCorrente = sessione.getUtenteCorrente().getUserId();
@@ -407,8 +446,10 @@ public class Controller {
 
   }
 
-
-
+  /**
+   * Gestisce la visualizzazione dei dati di una libreria tramite {@link MenuPaginamentoRisultatiView}
+   * @param libreria libreria
+   */
   public void visualizzaLibreria(Libreria libreria) {
 
     // crea una richiesta di ricerca nulla (restituisce tutti i risultati)
@@ -420,8 +461,11 @@ public class Controller {
 
   }
 
-
-
+  /**
+   * Gestisce la funzionalita' di registrazione di un utente, verificando la presenza di esso tra gli utenti.
+   * Acquisizione input tramite {@link MenuRegistrazioneView}
+   * In caso di successo, avviene il login automatico.
+   */
   void iniziaRegistrazione() {
     System.out.println("\n\t╠═══════ Registrazione ═══════╣\n\n");
 
@@ -437,13 +481,12 @@ public class Controller {
     } else {
       Feedback.warn("Registrazione annullata");
     }
-
-
   }
 
 
-/**
- * Semplice stampa a video per indicare la selezione dell'operazione di "login"*/
+  /**
+   * Gestisce la selezione dell'operazione di "login", consentendo a un utente
+   * di autenticarsi tramite idUtente e password*/
   void iniziaLogin() {
     Utente u = MenuLoginView.display();
     sessione.accedi(u.getUserId(), u.getPassword());
@@ -454,6 +497,5 @@ public class Controller {
       Feedback.warn("Utente non registrato");
     }
   }
-
 
 }

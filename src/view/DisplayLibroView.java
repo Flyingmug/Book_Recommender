@@ -26,12 +26,12 @@ public class DisplayLibroView {
   final static Scanner scanner = new Scanner(System.in);
 
   /**
-   * Visualizzazione pagina dedicata al libro l
+   * Consente di visualizzare la pagina dedicata alle informazioni sul libro {@code l}
    *
    * @param l libro da visualizzare
    * @param valMedia valutazione media del libro
    * @param modalita modalita' di accesso
-   * @return String
+   * @return operazione scelta
    */
   public static String display(Libro l, Valutazione valMedia, int totaleValutazioni, ModalitaAccesso modalita) {
 

@@ -5,8 +5,9 @@ import Utilities.Utils;
 import model.Utente;
 
 import java.util.Scanner;
+
 /**
- * Classe View (in base all'architettura MVC - ModelViewController) utilizzata per stampare a video i dati necessari
+ * Classe View (in base all'architettura MVC - ModelViewController) utilizzata per acquisire i dati necessari
  * alla registrazione.
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
@@ -19,8 +20,7 @@ public class MenuRegistrazioneView {
 
   /**
    * Metodo che preleva i dati per creare un nuovo utente.
-   * Ritorna il nuovo utente che verrà aggiunto al file "UtentiRegistrati"
-   * @return Utente*/
+   * @return utente creato o null se si è verificato un errore*/
   public static Utente display() {
 
     System.out.println("╔ Inserire "+bb+"."+rs+" per uscire\n║");
@@ -54,11 +54,16 @@ public class MenuRegistrazioneView {
     return new Utente(nome, cognome, codFiscale, email, userId, password);
   }
 
+  /**
+   * Pone l'utente in un ciclo il quale vieta l'uscita fino all'inserimento
+   * di un valore valido o un carattere di uscita prestabilito.
+   * @return input utente validato
+   */
   private static String leggiValidaInput() {
     while (true) {
       String input = scanner.nextLine().trim();
 
-      // Controlla presenza di "."
+      // Controlla presenza di "." (carattere di uscita)
       if (input.equals(".")) {
         return null;
       }
@@ -66,7 +71,7 @@ public class MenuRegistrazioneView {
       if (input.isBlank()) {
         System.out.println("Input cannot be blank. Please enter a valid value:");
       } else {
-        // Normalize spaces between words (replace multiple spaces with a single space)
+        // Normalizza gli spazi tra parole (sostituisce i doppi con singoli)
         return input.replaceAll("\\s+", " ");
       }
     }
