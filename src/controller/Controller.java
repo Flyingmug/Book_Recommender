@@ -289,7 +289,7 @@ public class Controller {
             // visualizzazione dati di un libro
             int indice = Integer.parseInt(sceltaOperazioneLibreria);
             if (indice > 0 && indice <= numOccorrenze) {
-              visualizzaLibreria(libreriePersonali.getLibrerie().get(indice));
+              visualizzaLibreria(libreriePersonali.getLibrerie().get(indice-1));
             } else
               Feedback.warn("Indice selezionato non valido");
           } else

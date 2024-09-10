@@ -1,13 +1,9 @@
 package view;
 
 import Utilities.ColoriConsole;
-import model.CriterioRicerca;
-import model.GestoreLibrerie;
 import model.Libreria;
-import model.Libro;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -35,7 +31,7 @@ public class MenuLibreriePersonali {
     int i = 0;
     String output = "";
     for (Libreria l: librerie) {
-      String indice = String.format("%0" + cifreNumOcc + "d", i/* + indicePaginaCorrente*dim_pagina+1*/);
+      String indice = String.format("%0" + cifreNumOcc + "d", i/* + indicePaginaCorrente*dim_pagina*/+1);
       output = l.getNomeLibreria();
       System.out.println(((i%2)==0?wb:cb)+"╠ "+indice+' '+output+rs+" ("+l.getConteggio()+')');
       i++;
