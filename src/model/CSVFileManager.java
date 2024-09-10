@@ -25,7 +25,12 @@ public class CSVFileManager {
    * @param classe classe dell'elemento da leggere
    * @return lista di tutti gli elementi prelevati dal file*/
   public static <T> List<T> leggiDatiCsv(String filePath, Class<T> classe) {
-    List<T> recordsList = new LinkedList<>();
+    List<T> recordsList;
+
+    if (classe == Libro.class)
+      recordsList = new ArrayList<>();
+    else
+      recordsList = new LinkedList<>();
 
     CSVFormat csvFormat = CSVFormat.Builder.create()
         .setHeader(getHeaders(classe))
@@ -53,7 +58,6 @@ public class CSVFileManager {
             );
             recordsList.add(classe.cast(u));
           } else if (classe == Libro.class) {
-            recordsList = new ArrayList<>();
             Libro l = new Libro(
                 csvRecord.get("IdLibro"),
                 csvRecord.get("Titolo"),

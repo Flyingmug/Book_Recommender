@@ -75,11 +75,6 @@ public class Utils {
       throw new IllegalArgumentException("Il limite non può essere negativo.");
     }
 
-    // Verify that 'salto' (start index) is within the bounds of the list
-    if (salto >= list.size()) {
-      throw new IllegalArgumentException("Il salto non può superare la dimensione della lista.");
-    }
-
     return list.subList(salto, Math.min(salto + limite, list.size()));
   }
 }

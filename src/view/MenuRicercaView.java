@@ -53,7 +53,7 @@ public class MenuRicercaView {
                 try {
                     annoPubblicazione = Integer.parseInt(scanner.nextLine());
                 } catch (NumberFormatException e) {
-                    System.err.println("Formato numerico per l'anno fornito non valido.");
+                    System.out.println("Formato numerico per l'anno fornito non valido.");
                 }
                 break;
 
