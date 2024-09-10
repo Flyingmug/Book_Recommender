@@ -2,7 +2,7 @@ package view;
 
 import Utilities.ColoriConsole;
 import model.Libro;
-import model.Utente;
+import model.ModalitaAccesso;
 import model.Valutazione;
 
 import java.util.Scanner;
@@ -25,11 +25,13 @@ public class DisplayLibroView {
 
   /**
    * Visualizzazione video
+   *
    * @param l
    * @param valMedia
+   * @param modalita
    * @return String
    */
-  public static String display(Libro l, Valutazione valMedia) {
+  public static String display(Libro l, Valutazione valMedia, ModalitaAccesso modalita) {
 
     String editore = l.getEditore();
     String categorie = l.getCategorie();
@@ -46,19 +48,25 @@ public class DisplayLibroView {
     System.out.println("║╚══════════════════════════\n║");
 
     System.out.println("║\t════╣ "+cy+"Valutazione media"+rs+" ╠════\n║╠");
-    System.out.println("║╠ Voto Finale   " + yb + indicatore.repeat(valMedia.getVotoFinale()) + rs);
-    System.out.println("║╠ Stile         " + yb + indicatore.repeat(valMedia.getStile()) + rs);
-    System.out.println("║╠ Contenuto     " + yb + indicatore.repeat(valMedia.getContenuto()) + rs);
-    System.out.println("║╠ Gradevolezza  " + yb + indicatore.repeat(valMedia.getGradevolezza()) + rs);
-    System.out.println("║╠ Originalita   " + yb + indicatore.repeat(valMedia.getOriginalita()) + rs);
-    System.out.println("║╠ Edizione      " + yb + indicatore.repeat(valMedia.getEdizione()) + rs);
+    if (valMedia.getVotoFinale() > 0) {
+      System.out.println("║╠ Voto Finale   " + yb + indicatore.repeat(valMedia.getVotoFinale()) + rs);
+      System.out.println("║╠ Stile         " + yb + indicatore.repeat(valMedia.getStile()) + rs);
+      System.out.println("║╠ Contenuto     " + yb + indicatore.repeat(valMedia.getContenuto()) + rs);
+      System.out.println("║╠ Gradevolezza  " + yb + indicatore.repeat(valMedia.getGradevolezza()) + rs);
+      System.out.println("║╠ Originalita   " + yb + indicatore.repeat(valMedia.getOriginalita()) + rs);
+      System.out.println("║╠ Edizione      " + yb + indicatore.repeat(valMedia.getEdizione()) + rs);
+    } else {
+      System.out.println("║╠ Nessuna valutazione presente \n║╠");
+    }
     System.out.println("╩╩");
 
     System.out.println("\n ["+gr+"E"+rs+"]sci");
 
-    System.out.println(" ["+pr+"V"+rs+"]aluta il libro");
-    System.out.print(" ["+pr+"S"+rs+"]uggerisci libri\n >> ");
-
+    if (modalita.equals(ModalitaAccesso.OPERATING)) {
+      System.out.println(" ["+pr+"V"+rs+"]aluta il libro");
+      System.out.println(" ["+pr+"S"+rs+"]uggerisci libri (Max 3)");
+    }
+    System.out.print(" >> ");
 
     return scanner.nextLine();
   }

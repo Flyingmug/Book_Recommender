@@ -23,15 +23,19 @@ public class Controller {
 
   GestoreRaccolta raccolta;
   GestoreSessione sessione;
+  GestoreValutazioni valutazioni;
+  GestoreConsigliLettura consigliLettura;
   Scanner scanner;
   final int DIM_PAGINA = 15;
+  final int SELECTION_LIMIT = 3;
 
   /**
    * Costruttore Controller del sistema */
   public Controller() {
-    raccolta = new GestoreRaccolta();
-    raccolta.caricaDati(path_libri, path_valutazioni);
+    raccolta = new GestoreRaccolta(path_libri);
     sessione = new GestoreSessione(path_utenti_registrati);
+    valutazioni = new GestoreValutazioni(path_valutazioni);
+    consigliLettura = new GestoreConsigliLettura(path_consigli_lettura);
     scanner = new Scanner(System.in);
   }
 
@@ -102,7 +106,7 @@ public class Controller {
   List<Libro> iniziaRicerca(GestoreRaccolta raccoltaLibri, ModalitaAccesso modalita, RichiestaRicerca richiesta) {
 
     boolean richiestaNuovaRicerca;
-    List<Libro> idLibriSelezionati = new LinkedList<>();
+    List<Libro> libriSelezionati = new LinkedList<>();
 
     do {
       // Verifica la presenza di una richiesta iniziale
@@ -110,7 +114,7 @@ public class Controller {
         List<Libro> risultati = raccoltaLibri.cercaLibro(richiesta);
 
         // mostra risultati di ricerca
-        richiestaNuovaRicerca = iniziaPaginazioneRisultati(risultati, richiesta.getCriterio(), modalita, idLibriSelezionati);
+        richiestaNuovaRicerca = iniziaPaginazioneRisultati(risultati, richiesta.getCriterio(), modalita, libriSelezionati);
 
         richiesta = null;
       } else {
@@ -120,10 +124,13 @@ public class Controller {
         richiestaNuovaRicerca = true;
       }
 
+
+
     } while (richiestaNuovaRicerca);
 
-    if (modalita.equals(ModalitaAccesso.ADDING)) {
-      return idLibriSelezionati;
+    if (modalita.equals(ModalitaAccesso.SELECTING) ||
+        (modalita.equals(ModalitaAccesso.LIMITED_SELECTING) && libriSelezionati.size() <= 3)) {
+      return libriSelezionati;
     }
     return null;
   }
@@ -135,7 +142,7 @@ public class Controller {
  * @param risultati RaccoltaLibri
  * @param criterio CriterioRicerca
  * @return true per una nuova richiesta di ricerca, false per richiedere di uscire */
-  boolean iniziaPaginazioneRisultati(List<Libro> risultati, CriterioRicerca criterio, ModalitaAccesso modalita, List<Libro> idLibriSelezionati) {
+  boolean iniziaPaginazioneRisultati(List<Libro> risultati, CriterioRicerca criterio, ModalitaAccesso modalita, List<Libro> libriSelezionati) {
     String sceltaOpzionePagina;
     int indicePaginaCorrente = 0;
     int numOccorrenze = risultati.size();
@@ -152,43 +159,53 @@ public class Controller {
           case "a":
             if (indicePaginaCorrente < numeroPagine - 1) indicePaginaCorrente++;
             break;
+
           case "i":
             if (indicePaginaCorrente > 0) indicePaginaCorrente--;
             break;
+
           case "p":
             // displayPageSelectionInput DEVE avere nella descrizione del funzionamento indicata la restituzione della scelta fatta dall'utente
             String pSel = MenuPaginamentoRisultatiView.displayPageSelectionInput();
 
             if (Utils.isInteger(pSel)) {
               int numPaginaSel = Integer.parseInt(pSel);
+
               if(numPaginaSel > 0 && numPaginaSel <= numeroPagine)
-                indicePaginaCorrente = numPaginaSel-1;
+                indicePaginaCorrente = numPaginaSel - 1;
               else
                 Feedback.warn("Pagina inesistente");
+
             } else
               Feedback.warn("Solo numeri interi ammessi");
             break;
+
           case "c":
             return true;
+
           case "e":
             return false;
+
           default:
 
             // aggiunta di libri alla libreria
              if (Utils.isInteger(sceltaOpzionePagina)) {
               // visualizzazione dati di un libro
               int indice = Integer.parseInt(sceltaOpzionePagina);
-               if (modalita.equals(ModalitaAccesso.ADDING)) {
-                 idLibriSelezionati.add(risultati.get(indice));
-                 Feedback.info("Libro selezionato");
+              if (modalita == ModalitaAccesso.SELECTING || modalita == ModalitaAccesso.LIMITED_SELECTING) {
+                libriSelezionati.add(risultati.get(indice));
+                Feedback.info("Libro selezionato");
 
-               } else if (indice > 0 && indice <= numOccorrenze) {
-                visualizzaLibro(risultati.get(indice));
+                if (modalita == ModalitaAccesso.LIMITED_SELECTING && libriSelezionati.size() == 3) {
+                  Feedback.info("3 libri selezionati");
+                  return false;
+                }
+              } else if (indice > 0 && indice <= numOccorrenze) {
+                visualizzaLibro(risultati.get(indice-1), modalita);
               } else
                 Feedback.warn("Indice selezionato non valido");
             } else
               Feedback.warn("Operazione inesistente");
-
             break;
         }
 
@@ -201,20 +218,34 @@ public class Controller {
 /**
  * Metodo utilizzato per stampare a video il/i libro/i richiesto (tramite classe DisplayLibroView)
  * @param l Libro*/
-  void visualizzaLibro(Libro l) {
+  void visualizzaLibro(Libro l, ModalitaAccesso modalita) {
 
-    Valutazione valMedia = new Valutazione(1, 1, 1, 1, 1); /*raccolta.ottieniValutazioneMediaLibro(l);*/
+    Valutazione valMedia = valutazioni.valutazioneMedia(l);
 
     boolean uscitaPaginaLibro = false;
     do {
 
-      String scelta = DisplayLibroView.display(l, valMedia);
+      String scelta = DisplayLibroView.display(l, valMedia, modalita);
       switch (scelta.toLowerCase()) {
-        case "c":
-
+        case "s":
+          if (modalita.equals(ModalitaAccesso.OPERATING)) {
+            if (!consigliLettura.consigliUtenteCompleti(sessione.getUtenteCorrente().getUserId(), l.getIdLibro())) {
+              inserisciSuggerimentoLibro(l);
+              Feedback.success("Suggerimento inserito");
+            } else {
+              Feedback.warn("Sono già stati inseriti 3 consigli per questo libro");
+            }
+          }
           break;
         case "v":
-
+          if (modalita.equals(ModalitaAccesso.OPERATING)) {
+            if (!valutazioni.valutazioneUtentePresente(sessione.getUtenteCorrente().getUserId(), l.getIdLibro())) {
+              inserisciValutazioneLibro(l);
+              Feedback.success("Valutazione inserita");
+            } else {
+              Feedback.warn("La valutazione per il libro è già stata inserita");
+            }
+          }
           break;
         case "e":
           break;
@@ -229,6 +260,41 @@ public class Controller {
       }
 
     } while(!uscitaPaginaLibro);
+  }
+
+  void inserisciValutazioneLibro(Libro l) {
+
+    Valutazione v = MenuValutazioneView.display();
+    if (v != null) {
+      v.setIdLibro(l.getIdLibro());
+      v.setIdUtente(sessione.getUtenteCorrente().getUserId());
+      valutazioni.aggiungi(v);
+    } else
+      Feedback.warn("Il valore inserito non rispetta le condizioni indicate");
+  }
+
+  void inserisciSuggerimentoLibro(Libro l) {
+
+    MenuConsigliLetturaView.display();
+    List<Libro> libriSelezionati = iniziaRicerca(raccolta, ModalitaAccesso.LIMITED_SELECTING, null);
+    if (!libriSelezionati.isEmpty()) {
+      // estrazione id libri
+      String[] idLibri = new String[SELECTION_LIMIT];
+      for(int i = 0; i < Math.min(idLibri.length, libriSelezionati.size()); i++) {
+        idLibri[i] = libriSelezionati.get(i).getIdLibro();
+      }
+      ConsiglioLettura c = new ConsiglioLettura();
+      c.setIdLibro(l.getIdLibro());
+      c.setIdUtente(sessione.getUtenteCorrente().getUserId());
+      try {
+        c.setIdConsigli(idLibri);
+      } catch (IllegalArgumentException | NullPointerException e) {
+        Feedback.err(e.getMessage());
+      }
+      // aggiunta consiglio di lettura
+      consigliLettura.aggiungi(c);
+    } else
+      Feedback.warn("Non sono stati selezionati consigli");
   }
 
 
@@ -257,7 +323,7 @@ public class Controller {
           if (!libreriePersonali.getLibrerie().contains(lib)) {
 
             Feedback.info("Seleziona i libri da aggiungere alla libreria");
-            List<Libro> selezioni = iniziaRicerca(raccolta, ModalitaAccesso.ADDING, null);
+            List<Libro> selezioni = iniziaRicerca(raccolta, ModalitaAccesso.SELECTING, null);
             lib.aggiungiListaLibri(selezioni);
             libreriePersonali.registraLibreria(lib, idUtenteCorrente);
             numOccorrenze++;

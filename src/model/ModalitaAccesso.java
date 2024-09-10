@@ -1,7 +1,8 @@
 package model;
 
 public enum ModalitaAccesso {
-  READING,
   OPERATING,
-  ADDING
+  READING,
+  SELECTING,
+  LIMITED_SELECTING
 }

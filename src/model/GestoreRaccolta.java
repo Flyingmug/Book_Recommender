@@ -2,7 +2,6 @@ package model;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.ToIntFunction;
 
 /**
  * Classe che gestisce le librerie
@@ -11,19 +10,21 @@ import java.util.function.ToIntFunction;
 public class GestoreRaccolta {
 
   List<Libro> elenco;
-  /*List<Valutazione> valutazioni;*/
 
   /**
    * Costruttore RaccoltaLibri.
-   * Istanzia una lista di libri e una lista di valutazioni vuoti*/
+   * Istanzia una lista di libri vuota,*/
   public GestoreRaccolta() {
     elenco = new LinkedList<>();
-    /*valutazioni = new LinkedList<>();*/
+  }
+
+  public GestoreRaccolta(String pathLibri) {
+    caricaDati(pathLibri);
   }
 
   /**
-   * Setta il valore in input.
-   * @param elenco List<Libro> */
+   * Crea un'istanza e setta il valore in input come elenco di libri.
+   * @param elenco Lista di libri */
   public GestoreRaccolta(List<Libro> elenco) {
     this.elenco = elenco;
   }
@@ -37,7 +38,7 @@ public class GestoreRaccolta {
   /**
    * Preleva i dati dei libri e delle valutazioni tramite la classe CSVFileManager
    */
-  public void caricaDati(String pathLibri, String pathValutazioni) {
+  public void caricaDati(String pathLibri) {
     elenco = CSVFileManager.leggiDatiCsv(pathLibri, Libro.class);
     /*valutazioni = CSVFileManager.leggiDatiCsv(pathValutazioni, Valutazione.class);*/
   }
@@ -88,23 +89,6 @@ public class GestoreRaccolta {
    */
   public static List<Libro> sottoRaccolta(List<Libro> elenco, int salto, int limite) {
     return elenco.subList(salto, Math.min(salto + limite, elenco.size()));
-  }
-
-
-  /*public Valutazione ottieniValutazioneMediaLibro(Libro l) {
-
-    *//*la valutazione media qui funziona solo con la media di tutte le valutazioni?*//*
-    Valutazione valMedia = new Valutazione();
-    valMedia.setStile(calcolaMediaValutazione(valutazioni, Valutazione::getStile));
-    valMedia.setContenuto(calcolaMediaValutazione(valutazioni, Valutazione::getContenuto));
-    valMedia.setGradevolezza(calcolaMediaValutazione(valutazioni, Valutazione::getGradevolezza));
-    valMedia.setOriginalita(calcolaMediaValutazione(valutazioni, Valutazione::getOriginalita));
-    valMedia.setEdizione(calcolaMediaValutazione(valutazioni, Valutazione::getEdizione));
-
-    return valMedia;
-  }*/
-  int calcolaMediaValutazione(List<Valutazione> lista, ToIntFunction<Valutazione> metodo) {
-    return (int) lista.stream().mapToInt(metodo).average().orElse(0);
   }
 
 }

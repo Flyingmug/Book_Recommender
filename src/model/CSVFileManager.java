@@ -66,11 +66,14 @@ public class CSVFileManager {
             recordsList.add(classe.cast(l));
           } else if (classe == Valutazione.class) {
             Valutazione v = new Valutazione(
+                csvRecord.get("IdLibro"),
+                csvRecord.get("IdUtente"),
                 Integer.parseInt(csvRecord.get("Stile")),
                 Integer.parseInt(csvRecord.get("Contenuto")),
                 Integer.parseInt(csvRecord.get("Gradevolezza")),
                 Integer.parseInt(csvRecord.get("Originalita")),
-                Integer.parseInt(csvRecord.get("Edizione"))
+                Integer.parseInt(csvRecord.get("Edizione")),
+                csvRecord.get("Recensione")
             );
             recordsList.add(classe.cast(v));
           } else if (classe == EntryLibreria.class) {
@@ -81,6 +84,15 @@ public class CSVFileManager {
                 csvRecord.get("IdLibro")
             );
             recordsList.add(classe.cast(el));
+          } else if (classe == ConsiglioLettura.class) {
+            ConsiglioLettura c = new ConsiglioLettura(
+                csvRecord.get("IdLibro"),
+                csvRecord.get("IdUtente"),
+                csvRecord.get("IdConsiglio1"),
+                csvRecord.get("IdConsiglio2"),
+                csvRecord.get("IdConsiglio3")
+            );
+            recordsList.add(classe.cast(c));
           }
         } catch (IllegalStateException e) {
           headerErrorCount++;
@@ -139,7 +151,7 @@ public class CSVFileManager {
          CSVPrinter csvPrinter = new CSVPrinter(writer, csvFormat)) {
 
       int recordConversionErrorCount = 0;
-      int recordDefinitionErrorCOunt = 0;
+      int recordDefinitionErrorCount = 0;
       for (T record : recordsList) {
         try {
           Iterable<?> i = convertToCsvRecord(record);
@@ -147,14 +159,14 @@ public class CSVFileManager {
         } catch (UnknownClassException e) {
           recordConversionErrorCount++;
         } catch (IOException e) {
-          recordDefinitionErrorCOunt++;
+          recordDefinitionErrorCount++;
         }
       }
 
       if (recordConversionErrorCount > 0)
         Feedback.err(recordConversionErrorCount + " errori nella conversione");
-      if (recordDefinitionErrorCOunt > 0)
-        Feedback.err(recordDefinitionErrorCOunt + " oggetti non rispettano le condizioni di definizione");
+      if (recordDefinitionErrorCount > 0)
+        Feedback.err(recordDefinitionErrorCount + " oggetti non rispettano le condizioni di definizione");
 
       csvPrinter.flush();
     } catch (IOException e) {
@@ -177,9 +189,11 @@ public class CSVFileManager {
     } else if (classe == Libro.class) {
       return new String[]{"IdLibro", "Titolo", "Autori", "Categorie", "Editore", "Anno Pubblicazione"};
     } else if (classe == Valutazione.class) {
-      return new String[]{"Stile", "Contenuto", "Gradevolezza", "Originalita", "Edizione"};
+      return new String[]{"IdLibro", "IdUtente", "Stile", "Contenuto", "Gradevolezza", "Originalita", "Edizione", "Recensione"};
     } else if (classe == EntryLibreria.class) {
       return new String[]{"IdUtente", "IdLibreria", "Nome Libreria", "IdLibro"};
+    } else if (classe == ConsiglioLettura.class) {
+      return new String[]{"IdLibro", "IdUtente", "IdConsiglio1", "IdConsiglio2", "IdConsiglio3"};
     }
     throw new UnknownClassException("La classe utilizzata non è gestita dal sistema");
   }
@@ -197,10 +211,12 @@ public class CSVFileManager {
     } else if (record instanceof Libro lib) {
       return List.of(lib.getIdLibro(), lib.getTitolo(), lib.getAutori(), lib.getEditore(), lib.getCategorie(), lib.getAnnoPubblicazione());
     } else if (record instanceof Valutazione rating) {
-      return List.of(rating.getStile(), rating.getContenuto(), rating.getGradevolezza(),
-          rating.getOriginalita(), rating.getEdizione());
+      return List.of(rating.getIdLibro(), rating.getIdUtente(), rating.getStile(), rating.getContenuto(),
+          rating.getGradevolezza(), rating.getOriginalita(), rating.getEdizione(), rating.getRecensione());
     } else if (record instanceof EntryLibreria entry) {
       return List.of(entry.getIdUtente(), entry.getIdLibreria(), entry.getNomeLibreria(), entry.getIdLibro());
+    } else if (record instanceof ConsiglioLettura con) {
+      return List.of(con.getIdLibro(), con.getIdUtente(), con.getConsigli()[0], con.getConsigli()[1], con.getConsigli()[2]);
     }
     return List.of(); // Return an empty list if the object type is not recognized
   }

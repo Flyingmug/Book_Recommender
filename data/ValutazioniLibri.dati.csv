@@ -1,6 +1,2 @@
-Idlibro,Stile,Contenuto,Gradevolezza,Originalita,Edizione
-1,1,1,1,1,1
-2,1,1,1,1,1
-3,4,4,4,4,4
-4,2,2,2,2,2
-5,2,2,2,2,2
+IdLibro,IdUtente,Stile,Contenuto,Gradevolezza,Originalita,Edizione,Recensione
+edd754d2-2a9f-44f7-91e1-7ad25c4e5565,x,5,5,5,5,5,BBBBBBBBBBBB
