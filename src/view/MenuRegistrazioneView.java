@@ -1,5 +1,6 @@
 package view;
 
+import Utilities.ColoriConsole;
 import Utilities.Utils;
 import model.Utente;
 
@@ -11,6 +12,9 @@ import java.util.Scanner;
  * @author Moscatelli Alexander*/
 public class MenuRegistrazioneView {
 
+  final static String bb = ColoriConsole.BLUE_BOLD;
+  final static String rs = ColoriConsole.RESET;
+
   final static Scanner scanner = new Scanner(System.in);
 
   /**
@@ -19,22 +23,54 @@ public class MenuRegistrazioneView {
    * @return Utente*/
   public static Utente display() {
 
+    System.out.println("╔ Inserire "+bb+"."+rs+" per uscire\n║");
     System.out.print("╔ Nome: ");
-    String nome = scanner.nextLine();
-    System.out.print("╠ Cognome: ");
-    String cognome = scanner.nextLine();
-    System.out.print("╠ Codice Fiscale: ");
-    String codFiscale = scanner.nextLine();
+    String nome = leggiValidaInput();
+    if (nome == null) return null;
 
-    System.out.println("VERIFICA CODICE FISCALE: " + Utils.verCodiceFiscale(codFiscale));
+    System.out.print("╠ Cognome: ");
+    String cognome = leggiValidaInput();
+    if (cognome == null) return null;
+
+    System.out.print("╠ Codice Fiscale: ");
+    String codFiscale = leggiValidaInput();
+    if (!Utils.verCodiceFiscale(codFiscale) && !(codFiscale == null) && !codFiscale.equals("w")) {
+      System.out.println("Codice Fiscale non valido.");
+      return null; // Return null if the Codice Fiscale is not valid
+    }
 
     System.out.print("╠ Email: ");
-    String email = scanner.nextLine();
+    String email = leggiValidaInput();
+    if (email == null) return null;
+
     System.out.print("╠ User Id: ");
-    String userId = scanner.nextLine();
+    String userId = leggiValidaInput();
+    if (userId == null) return null;
+
     System.out.print("╚ Password: ");
-    String password = scanner.nextLine();
+    String password = leggiValidaInput();
+    if (password == null) return null;
 
     return new Utente(nome, cognome, codFiscale, email, userId, password);
   }
+
+  private static String leggiValidaInput() {
+    while (true) {
+      String input = scanner.nextLine().trim();
+
+      // Controlla presenza di "."
+      if (input.equals(".")) {
+        return null;
+      }
+
+      if (input.isBlank()) {
+        System.out.println("Input cannot be blank. Please enter a valid value:");
+      } else {
+        // Normalize spaces between words (replace multiple spaces with a single space)
+        return input.replaceAll("\\s+", " ");
+      }
+    }
+  }
 }
+
+

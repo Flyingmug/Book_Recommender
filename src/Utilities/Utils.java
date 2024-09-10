@@ -8,11 +8,11 @@ import java.util.List;
  */
 public class Utils {
   private static final String INTEGER_REGEX = "^-?\\d+$"; // Match per gli interi
-  private static final String FISCAL_REGEX = "^[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST]{1}[0-9LMNPQRSTUV]{2}[A-Z]{1}[0-9LMNPQRSTUV]{3}[A-Z]{1}$\n";
+  private static final String FISCAL_REGEX = "^[A-Z]{6}[0-9]{2}[ABCDEHLMPRST][0-9]{2}[A-Z][0-9]{3}[A-Z]";
 
   /**
    * Verifica se la stringa contiene un numero intero
-   * @param str
+   * @param str stringa
    * @return boolean
    */
   public static boolean isInteger(String str) {
@@ -21,11 +21,11 @@ public class Utils {
 
   /**
    * Verifica la correttezza del parametro secondo il formato codice fiscale italiano
-   * @param str
+   * @param codf codice fiscale
    * @return boolean
    */
-  public static boolean verCodiceFiscale(String str) {
-    return str != null && str.matches(FISCAL_REGEX);
+  public static boolean verCodiceFiscale(String codf) {
+    return codf != null && codf.matches(FISCAL_REGEX);
   }
 
   /**
