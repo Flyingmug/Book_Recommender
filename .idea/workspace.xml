@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="Miglioramenti alla registrazione">
+    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="commits on controller and some menus">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/DisplayLibroView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/DisplayLibroView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuConsigliLetturaView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuConsigliLetturaView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuRegistrazioneView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuRegistrazioneView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/CSVFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CSVFileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725977735819</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="commits on controller and some menus">
+      <option name="closed" value="true" />
+      <created>1725983652203</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1725983652203</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,6 +214,7 @@
     <MESSAGE value="Completamento suggerimenti e valutazioni" />
     <MESSAGE value="Full functionalities" />
     <MESSAGE value="Miglioramenti alla registrazione" />
-    <option name="LAST_COMMIT_MESSAGE" value="Miglioramenti alla registrazione" />
+    <MESSAGE value="commits on controller and some menus" />
+    <option name="LAST_COMMIT_MESSAGE" value="commits on controller and some menus" />
   </component>
 </project>

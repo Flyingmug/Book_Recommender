@@ -12,20 +12,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Classe responsabile della gestione lettura/scrittura nei file di tipo CSV (database utenti)
+ * Classe responsabile della gestione lettura/scrittura nei file di tipo CSV
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
 
 public class CSVFileManager {
 
-  /* lettura */
-
-
   /**
-   * Reperisce il file
-   * @param filePath String
-   * @param classe Class<T>
-   * @return  <T> List<T>*/
+   * Reperisce il file {@code filePath} e legge gli elementi convertiti alla classe {@code classe}
+   * @param filePath filepath
+   * @param classe classe dell'elemento da leggere
+   * @return lista di tutti gli elementi prelevati dal file*/
   public static <T> List<T> leggiDatiCsv(String filePath, Class<T> classe) {
     List<T> recordsList = new LinkedList<>();
 
@@ -117,16 +114,12 @@ public class CSVFileManager {
 
 
 
-  /* Scrittura */
-
-  // Generic method to write data to a CSV file
-
   /**
-   *
-   * @param filePath
-   * @param recordsList
-   * @param appendMode
-   * @param <T>
+   * Gestisce la scrittura di una lista di elementi, verificando che la classe degli elementi sia utilizzabile.
+   * @param filePath filepath
+   * @param recordsList lista di elementi
+   * @param appendMode modalita' append
+   * @param <T> tipo di elementi della lista
    */
   public static <T> void scriviDatiCsv(String filePath, List<T> recordsList, boolean appendMode) {
 
@@ -177,11 +170,11 @@ public class CSVFileManager {
   // Method to get the headers for the CSV file based on the class type
 
   /**
-   *
-   * @param classe
-   * @return
-   * @param <T>
-   * @throws UnknownClassException
+   * Restituisce gli header csv corrispondenti alla classe {@code classe}
+   * @param classe classe richiesta
+   * @return un vettore di stringhe rappresentanti gli header
+   * @param <T> tipo della classe
+   * @throws UnknownClassException header non definiti per la classe richiesta
    */
   private static <T> String[] getHeaders(Class<T> classe) throws UnknownClassException {
     if (classe == Utente.class) {
@@ -201,9 +194,9 @@ public class CSVFileManager {
   // Method to convert each object to a CSV record
 
   /**
-   *
-   * @param record
-   * @return
+   * Converte un oggetto nella sua rappresentazione iterabile, utilizzabile per la scrittura su file csv.
+   * @param record oggetto da convertire
+   * @return oggetto iterabile contenente le get dei campi dell'oggetto
    */
   private static Iterable<?> convertToCsvRecord(Object record) {
     if (record instanceof Utente user) {
@@ -221,13 +214,11 @@ public class CSVFileManager {
     return List.of(); // Return an empty list if the object type is not recognized
   }
 
-  // Method to check if the file has headers
-
   /**
-   *
-   * @param file
-   * @param classe
-   * @return
+   * Verifica la presenza dei corrispondenti header csv della classe {@code classe} nel file {@code f}
+   * @param file file da ispezionare
+   * @param classe classe di verifica degli header
+   * @return true: gli header sono presenti e corretti, false: gli header non sono presenti
    */
   private static boolean hasHeaders(File file, Class<?> classe) {
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
