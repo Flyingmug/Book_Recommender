@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Classe utilizzata per verificare la correttezza del codice fiscale inserito
+ * Classe contenente metodi generici con vari campi di utilizzo
  */
 public class Utils {
   private static final String INTEGER_REGEX = "^-?\\d+$"; // Match per gli interi
@@ -53,11 +53,11 @@ public class Utils {
 
   /**
    * Metodo utilizzato per ottenere un sottoinsieme di una lista di libri.
-   * Viene usato nella paginazione dei risultati, per mostrare solo X libri alla volta.
-   * @param list List<Libro>
-   * @param salto int
-   * @param limite int
-   * @return List<Valutazione>
+   * Viene usato nella paginazione dei risultati, per mostrare solo {@code limite} libri alla volta.
+   * @param list lista di elementi
+   * @param salto posizione di inizio
+   * @param limite numero di elementi da selezionare
+   * @return lista sezionata
    */
   public static <T> List<T> listSection(List<T> list, int salto, int limite) {
     // Verify that the input list is not null

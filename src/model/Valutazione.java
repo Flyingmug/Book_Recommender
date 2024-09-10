@@ -1,9 +1,10 @@
 package model;
 
-import java.util.UUID;
-
 /**
- * Classe utilizzata per definire le caratteristiche delle valutazioni, in termini di stile, contenuto, gradevolezza, originalita' ed edizione.
+ * Classe utilizzata per definire le caratteristiche delle valutazioni,
+ * in termini di stile, contenuto, gradevolezza, originalita' ed edizione.
+ * Vi è la possibilità che una valutazione abbia una recensione testuale,
+ * della dimensione massima di 256 caratteri
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
 public class Valutazione {
@@ -16,11 +17,15 @@ public class Valutazione {
   int edizione;
   String recensione;
 
+  /**
+   * Costruttore.
+   * Crea una istanza vuota
+   */
   public Valutazione() { }
 
   /**
    * Costruttore.
-   * I parametri passati vengono utilizzati per creare un'istanza
+   * I parametri passati vengono utilizzati per creare un'istanza.
    * @param idLibro String
    * @param idUtente String
    * @param stile int
@@ -42,66 +47,51 @@ public class Valutazione {
   }
 
   /**
-   * Metodo per reperire il campo: idLibro.
-   * @return String*/
+   * @return id libro */
   public String getIdLibro() { return idLibro; }
   /**
-   * Metodo per reperire il campo: idUtente.
-   * @return String*/
+   * @return id utente */
   public String getIdUtente() { return idUtente; }
   /**
-   * Metodo per reperire il campo: stile.
-   * @return int*/
+   * @return punteggio stile */
   public int getStile() { return stile; }
   /**
-   * Metodo per reperire il campo: contenuto.
-   * @return int*/
+   * @return punteggio contenuto */
   public int getContenuto() { return contenuto; }
   /**
-   * Metodo per reperire il campo: gradevolezza.
-   * @return int*/
+   * @return punteggio gradevolezza */
   public int getGradevolezza() { return gradevolezza; }
   /**
-   * Metodo per reperire il campo: originalita'.
-   * @return int*/
+   * @return punteggio originalita */
   public int getOriginalita() { return originalita; }
   /**
-   * Metodo per reperire il campo: edizione.
-   * @return int*/
+   * @return punteggio edizione */
   public int getEdizione() { return edizione; }
   /**
-   * Metodo per reperire il voto finale.
-   * @return int*/
+   * @return punteggio finale */
   public int getVotoFinale() { return (stile+contenuto+gradevolezza+originalita+edizione)/5; }
   /**
-   * Metodo per reperire la recensione testuale.
-   * @return String*/
+   * @return recensione testuale*/
   public String getRecensione() { return recensione; }
 
   /**
-   * Metodo per settare il campo: stile.
-   * @param stile int*/
+   * @param stile punteggio stile */
   public void setStile(int stile) { this.stile = stile; }
   /**
-   * Metodo per settare il campo: contenuto.
-   * @param contenuto int*/
+   * @param contenuto punteggio contenuto */
   public void setContenuto(int contenuto) { this.contenuto = contenuto; }
   /**
-   * Metodo per settare il campo: gradevolezza.
-   * @param gradevolezza int*/
+   * @param gradevolezza punteggio gradevolezza */
   public void setGradevolezza(int gradevolezza) { this.gradevolezza = gradevolezza; }
   /**
-   * Metodo per settare il campo: originalita.
-   * @param originalita int*/
+   * @param originalita punteggio originalita */
   public void setOriginalita(int originalita) { this.originalita = originalita; }
   /**
-   * Metodo per settare il campo: edizione.
-   * @param edizione int*/
+   * @param edizione punteggio edizione */
   public void setEdizione(int edizione) { this.edizione = edizione; }
   /**
-   * Metodo per settare il campo: recensione.
-   * Rimuove ogni carattere dalla posizione 256 in poi
-   * @param recensione String
+   * Imposta la recensione e rimuove ogni carattere dal 256° in poi
+   * @param recensione recensione
    */
   public void setRecensione(String recensione) {
     if (recensione.length() > 256) {
@@ -117,12 +107,4 @@ public class Valutazione {
    * @param idUtente int*/
   public void setIdUtente(String idUtente) { this.idUtente = idUtente; }
 
-
-  
-  public void setNewIdLibro(String id) {
-    idLibro = id;
-  }
-  public void setNewIdUtente(String id) {
-    idUtente = id;
-  }
 }

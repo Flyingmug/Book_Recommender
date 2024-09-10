@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Classe che gestisce le librerie
+ * Classe che gestisce una raccolta di libri
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
 public class GestoreRaccolta {
@@ -18,6 +18,9 @@ public class GestoreRaccolta {
     elenco = new LinkedList<>();
   }
 
+  /**
+   * Costruttore RaccoltaLibri.
+   * Istanzia e riempe una lista di libri tramite il path {@code pathLibri},*/
   public GestoreRaccolta(String pathLibri) {
     caricaDati(pathLibri);
   }
@@ -25,29 +28,25 @@ public class GestoreRaccolta {
   /**
    * Crea un'istanza e setta il valore in input come elenco di libri.
    * @param elenco Lista di libri */
-  public GestoreRaccolta(List<Libro> elenco) {
-    this.elenco = elenco;
-  }
+  public GestoreRaccolta(List<Libro> elenco) { this.elenco = elenco; }
 
   /**
-   * Restituisce la lista di libri.
-   * @return String*/
+   * @return lista di libri gestita*/
   public List<Libro> getElenco() { return elenco; }
 
 
   /**
-   * Preleva i dati dei libri e delle valutazioni tramite la classe CSVFileManager
+   * Preleva i dati dei libri tramite la classe {@link CSVFileManager}
    */
   public void caricaDati(String pathLibri) {
     elenco = CSVFileManager.leggiDatiCsv(pathLibri, Libro.class);
-    /*valutazioni = CSVFileManager.leggiDatiCsv(pathValutazioni, Valutazione.class);*/
   }
 
-/**
- * Dopo aver verificato che l'utente abbia scelto un criterio adeguato, viene effettuata la ricerca del libro corrispondente.
- * @param richiesta RichiestaRicerca
- * @return List<Libro>
- */
+  /**
+   * Dopo aver verificato che l'utente abbia scelto un criterio adeguato, viene effettuata la ricerca dei libri risultanti.
+   * @param richiesta richiesta di ricerca
+   * @return lista di libri risultante
+   */
   public List<Libro> cercaLibro(RichiestaRicerca richiesta) {
 
     List<Libro> risultato = new LinkedList<>();

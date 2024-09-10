@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Elenca le caratteristiche delle librerie e fornisce un metodo per aggiungere libri
+ * Rappresenta una libreria con i rispettivi metodi di aggiunta
  */
 public class Libreria {
 
@@ -13,9 +13,9 @@ public class Libreria {
   String nome;
 
   /**
-   *
-   * @param idLibreria
-   * @param nome
+   * Restituisce una istanza della classe Libreria, con elenco di libri vuoto.
+   * @param idLibreria id libreria
+   * @param nome nome libreria
    */
   public Libreria(String idLibreria, String nome) {
     elenco = new LinkedList<>();
@@ -23,14 +23,29 @@ public class Libreria {
     this.nome = nome;
   }
 
+  /**
+   * @return id libreria
+   */
   public String getIdLibreria() { return idLibreria; }
+
+  /**
+   * @return nome libreria
+   */
   public String getNomeLibreria() { return nome; }
+
+  /**
+   * @return elenco dei libri contenuti
+   */
   public List<Libro> getElencoLibri() { return elenco; }
+
+  /**
+   * @return conteggio di libri presenti
+   */
   public int getConteggio() { return elenco.size(); }
 
   /**
-   *
-   * @param libro
+   * Aggiunge un libro alla libreria
+   * @param libro libro
    */
   public void aggiungiLibro(Libro libro) {
     if (!elenco.contains(libro)) {
@@ -38,6 +53,10 @@ public class Libreria {
     }
   }
 
+  /**
+   * Aggiunge una lista di libri alla libreria
+   * @param lista lista di libri
+   */
   public void aggiungiListaLibri(List<Libro> lista) {
     if (!lista.isEmpty()) {
       elenco.addAll(lista);
@@ -45,9 +64,8 @@ public class Libreria {
   }
 
   /**
-   *
-   * @param obj
-   * @return
+   * @param obj oggetto da confrontare
+   * @return {@code true} se il nome corrisponde, {@code false} altrimenti
    */
   @Override
   public boolean equals(Object obj) {

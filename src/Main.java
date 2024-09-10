@@ -1,3 +1,4 @@
+import Utilities.ColoriConsole;
 import controller.Controller;
 
 /**
@@ -13,12 +14,14 @@ public class Main {
     // inizializzazione gestore della raccolta locale
     Controller manager = new Controller();
 
+    String cbg = ColoriConsole.BLACK_BACKGROUND;
+    String rs = ColoriConsole.RESET;
 
-    System.out.println("\n\n\n\t (\\¯¯¯¯¯¯¯¯\\");
-    System.out.println("\t \\ \\.;.;.;.;\\");
-    System.out.println("\t  \\ \\.;.;.;.;\\");
-    System.out.println("\t   \\ \\.;.;.;.;\\");
-    System.out.println("\t    \\(≡≡≡≡≡≡≡≡(");
+    System.out.println("\n\n\n\t  "+cbg+"(\\¯¯¯¯¯¯¯¯\\"+rs);
+    System.out.println("\t  "+cbg+"\\ \\.;.;.;.;\\"+rs);
+    System.out.println("\t   "+cbg+"\\ \\.;.;.;.;\\"+rs);
+    System.out.println("\t    "+cbg+"\\ \\.;.;.;.;\\"+rs);
+    System.out.println("\t     "+cbg+"\\(≡≡≡≡≡≡≡≡("+rs);
 
     manager.iniziaCicloPrincipale();
 

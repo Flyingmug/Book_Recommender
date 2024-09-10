@@ -294,7 +294,7 @@ public class Controller {
    */
   void inserisciSuggerimentoLibro(Libro l) {
 
-    if (!consigliLettura.consigliUtenteCompleti(sessione.getUtenteCorrente().getUserId(), l.getIdLibro())) {
+    if (!consigliLettura.consigliUtenteCompleti(sessione.getUtenteCorrente().getUserId(), l.getIdLibro(), SELECTION_LIMIT)) {
 
       MenuConsigliLetturaView.displayInserimento();
       List<Libro> libriSelezionati = iniziaRicerca(raccolta, ModalitaAccesso.LIMITED_SELECTING, null, "Libri da suggerire");

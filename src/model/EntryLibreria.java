@@ -1,7 +1,7 @@
 package model;
 
 /**
- *Classe che mette in relazione i libri, gli utenti, e le librerie
+ * Classe che mette in relazione i libri, gli utenti, e le librerie
  */
 public class EntryLibreria {
 
@@ -12,10 +12,10 @@ public class EntryLibreria {
 
   /**
    * Costruttore classe EntryLibreria.
-   * @param idUtente
-   * @param idLibreria
-   * @param nomeLibreria
-   * @param idLibro
+   * @param idUtente id dell'utente correlato
+   * @param idLibreria id della libreria
+   * @param nomeLibreria nome della libreria
+   * @param idLibro id del libro
    */
   public EntryLibreria(String idUtente, String idLibreria, String nomeLibreria, String idLibro) {
     this.idUtente = idUtente;
@@ -25,19 +25,19 @@ public class EntryLibreria {
   }
 
   /**
-   * @return
+   * @return idUtente
    */
   public String getIdUtente() { return idUtente; }
   /**
-   * @return
+   * @return idLibreria
    */
   public String getIdLibreria() { return idLibreria; }
   /**
-   * @return
+   * @return nomeLibreria
    */
   public String getNomeLibreria() {  return nomeLibreria; }
   /**
-   * @return
+   * @return idLibro
    */
   public String getIdLibro() { return idLibro; }
 

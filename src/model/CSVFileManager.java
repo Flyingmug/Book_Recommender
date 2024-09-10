@@ -7,6 +7,7 @@ import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,6 +53,7 @@ public class CSVFileManager {
             );
             recordsList.add(classe.cast(u));
           } else if (classe == Libro.class) {
+            recordsList = new ArrayList<>();
             Libro l = new Libro(
                 csvRecord.get("IdLibro"),
                 csvRecord.get("Titolo"),
@@ -167,7 +169,6 @@ public class CSVFileManager {
     }
   }
 
-  // Method to get the headers for the CSV file based on the class type
 
   /**
    * Restituisce gli header csv corrispondenti alla classe {@code classe}
@@ -218,7 +219,7 @@ public class CSVFileManager {
    * Verifica la presenza dei corrispondenti header csv della classe {@code classe} nel file {@code f}
    * @param file file da ispezionare
    * @param classe classe di verifica degli header
-   * @return true: gli header sono presenti e corretti, false: gli header non sono presenti
+   * @return {@code true} se gli header sono presenti e corretti, {@code false} se gli header non sono presenti
    */
   private static boolean hasHeaders(File file, Class<?> classe) {
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

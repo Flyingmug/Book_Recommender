@@ -4,9 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="commits on controller and some menus">
+    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="commits on CSVFileManager">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utilities/Feedback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities/Feedback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utilities/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utilities/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/CSVFileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CSVFileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ConsiglioLettura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ConsiglioLettura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/CriterioRicerca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/CriterioRicerca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/EntryLibreria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/EntryLibreria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GestoreConsigliLettura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreConsigliLettura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GestoreLibrerie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreLibrerie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GestoreRaccolta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreRaccolta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GestoreSessione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreSessione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GestoreValutazioni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GestoreValutazioni.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Libreria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Libreria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Libro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Libro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ModalitaAccesso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ModalitaAccesso.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/RichiestaRicerca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/RichiestaRicerca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/UnknownClassException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/UnknownClassException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/UserIdUnavailableException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/UserIdUnavailableException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Utente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Utente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Valutazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Valutazione.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725983652203</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="commits on CSVFileManager">
+      <option name="closed" value="true" />
+      <created>1725984648107</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1725984648107</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -215,6 +243,7 @@
     <MESSAGE value="Full functionalities" />
     <MESSAGE value="Miglioramenti alla registrazione" />
     <MESSAGE value="commits on controller and some menus" />
-    <option name="LAST_COMMIT_MESSAGE" value="commits on controller and some menus" />
+    <MESSAGE value="commits on CSVFileManager" />
+    <option name="LAST_COMMIT_MESSAGE" value="commits on CSVFileManager" />
   </component>
 </project>

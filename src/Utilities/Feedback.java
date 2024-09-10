@@ -1,7 +1,7 @@
 package Utilities;
 
 /**
- * CLasse utilizzata per fornire messaggi di errore/avvisi
+ * CLasse utilizzata per fornire messaggi di errore/avviso/informazione
  */
 public class Feedback {
 
@@ -12,22 +12,22 @@ public class Feedback {
   final static String rs = ColoriConsole.RESET;
 
   /**
-   *
-   * @param msg
+   * @param msg messaggio
    */
   public static void warn(String msg) { System.out.println("\n" + yb + "!! " + msg + " !!" + rs); }
 
   /**
-   *
-   * @param msg
+   * @param msg messaggio
    */
   public static void err(String msg) { System.out.println("\n" + rb + msg + rs); }
 
   /**
-   *
-   * @param msg
+   * @param msg messaggio
    */
   public static void success(String msg) { System.out.println("\n" + gb + "█  " + msg + "  █" + rs); }
 
+  /**
+   * @param msg messaggio
+   */
   public static void info(String msg) { System.out.println("\n" + bb + "■  " + msg + "  ■" + rs); }
 }

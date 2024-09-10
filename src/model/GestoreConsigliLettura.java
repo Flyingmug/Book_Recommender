@@ -9,7 +9,8 @@ public class GestoreConsigliLettura {
 
   /**
    * Costruttore GestoreConsigliLettura.
-   * Istanzia una lista di libri vuota,*/
+   * Istanzia una lista di libri vuota
+   */
   public GestoreConsigliLettura() { elencoConsigli = new LinkedList<>(); }
 
   public GestoreConsigliLettura(String pathLibri) {
@@ -23,7 +24,7 @@ public class GestoreConsigliLettura {
   public GestoreConsigliLettura(List<ConsiglioLettura> elenco) { this.elencoConsigli = elenco; }
 
   /**
-   * Preleva i dati dei libri e delle valutazioni tramite la classe CSVFileManager
+   * Preleva i dati dei libri e delle valutazioni tramite la classe {@link CSVFileManager}
    */
   public void caricaDati(String pathConsigli) {
     path_consigli = pathConsigli;
@@ -57,16 +58,29 @@ public class GestoreConsigliLettura {
     return libri;
   }
 
+  /**
+   * Aggiunge e salva un nuovo consiglio di lettura
+   * @param c consiglio di lettura
+   */
   public void aggiungi(ConsiglioLettura c) {
     List<ConsiglioLettura> list = new LinkedList<>();
     list.add(c);
-    CSVFileManager.scriviDatiCsv(path_consigli, list, true);
-    elencoConsigli.add(c);
+    if (path_consigli != null) {
+      CSVFileManager.scriviDatiCsv(path_consigli, list, true);
+      elencoConsigli.add(c);
+    }
+
   }
 
-  public boolean consigliUtenteCompleti(String idUtente, String idLibro) {
+  /**
+   * Verifica il raggiungimento del limite di consigli di libri per il libro {@code idLibro} dell' utente {@code idUtente}
+   * @param idUtente utente
+   * @param idLibro libro
+   * @return {@code true} - se il limite è raggiunto, {@code false} altrimenti
+   */
+  public boolean consigliUtenteCompleti(String idUtente, String idLibro, int limite) {
     return elencoConsigli.stream().filter(x -> x.getIdUtente().equals(idUtente)
-        && x.getIdLibro().equals(idLibro)).toList().getFirst().getConsigli().length >= 3;
+        && x.getIdLibro().equals(idLibro)).toList().getFirst().getConsigli().length >= limite;
   }
 
 }

@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 /**
- * Classe utilizzata per definire le caratteristiche degli utenti: nome, cognome, codFisc, email, userId, password.
+ * Classe utilizzata per definire le caratteristiche degli utenti: nome, cognome, codFiscale, email, userId, password.
  * @author Selimi Sebian
  * @author Moscatelli Alexander*/
 public class Utente implements Serializable {
@@ -16,8 +16,8 @@ public class Utente implements Serializable {
 
 
   /**
-   * Costruttore.
-   * I parametri passati vengono utilizzati per creare un'istanza
+   * Costruttore della classe Utente.
+   * I parametri passati vengono utilizzati per creare un'istanza.
    * @param nome String
    * @param cognome String
    * @param codiceFiscale String
@@ -36,29 +36,22 @@ public class Utente implements Serializable {
 
 
   /**
-   * Metodo per reperire il campo: nome.
-   * @return String*/
+   * @return nome */
   public String getNome() { return nome; }
   /**
-   * Metodo per reperire il campo: cognome.
-   * @return String*/
+   * @return cognome */
   public String getCognome() { return cognome; }
   /**
-   * Metodo per reperire il campo: codiceFiscale.
-   * @return String*/
+   * @return codice fiscale */
   public String getCodiceFiscale() { return codiceFiscale; }
   /**
-   * Metodo per reperire il campo: email.
-   * @return String*/
+   * @return email */
   public String getEmail() { return email; }
   /**
-   * Metodo per reperire il campo: userId.
-   * @return String*/
+   * @return id utente*/
   public String getUserId() { return userId; }
   /**
-   * Metodo per reperire il campo: password.
-   * @return String*/
+   * @return password */
   public String getPassword() { return password; }
-
 
 }

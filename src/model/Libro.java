@@ -33,11 +33,29 @@ public class Libro {
     this.categorie = categorie;
   }
 
+  /**
+   * @return id libro
+   */
   public String getIdLibro() { return idLibro; }
+  /**
+   * @return titolo libro
+   */
   public String getTitolo() { return titolo; }
+  /**
+   * @return autori
+   */
   public String getAutori() { return autori; }
+  /**
+   * @return anno di pubblicazione
+   */
   public int getAnnoPubblicazione() { return annoPubblicazione; }
+  /**
+   * @return editore del libro
+   */
   public String getEditore() { return editore; }
+  /**
+   * @return categorie del libro
+   */
   public String getCategorie() { return categorie; }
 
   /**
@@ -55,6 +73,10 @@ public class Libro {
     return titolo + ", " + autori + ", " + annoPubblicazione;
   }
 
+  /**
+   * @param obj oggetto da confrontare
+   * @return {@code true} se gli id corrispondono, {@code false} altrimenti
+   */
   @Override
   public boolean equals(Object obj) {
     return obj.getClass() == Libro.class && this.idLibro.equals(((Libro) obj).getIdLibro());
