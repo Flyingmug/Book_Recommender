@@ -426,8 +426,7 @@ public class Controller {
     System.out.println("\n\t╠═══════ Registrazione ═══════╣\n\n");
 
     Utente u = MenuRegistrazioneView.display();
-    /*il menu al momento non restituisce nulli*/
-    if (u != null)
+    if (u != null) {
       try {
         sessione.registra(u);
       } catch (RuntimeException e) {
@@ -435,6 +434,10 @@ public class Controller {
       } finally {
         Feedback.success("Registrazione avvenuta con successo");
       }
+    } else {
+      Feedback.warn("Registrazione annullata dall'utente");
+    }
+
 
   }
 
