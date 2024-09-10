@@ -25,6 +25,24 @@ public class CSVFileManager {
    * @param classe classe dell'elemento da leggere
    * @return lista di tutti gli elementi prelevati dal file*/
   public static <T> List<T> leggiDatiCsv(String filePath, Class<T> classe) {
+    // Aggiungi i header al file se non esiste
+    File file = new File(filePath);
+    boolean fileExists = file.exists();
+    boolean saltaHeader = true;
+
+    // Crea il file se non esiste
+    if (!fileExists) {
+      try {
+        file.createNewFile();
+      } catch (IOException e) {
+        System.err.println("Errore nella creazione del file: " + e.getMessage());
+        return null; // Esci se la creazione fallisce
+      }
+    } else {
+      // Controlla la presenza e la correttezza degli header
+      saltaHeader = hasHeaders(file, classe);
+    }
+
     List<T> recordsList;
 
     if (classe == Libro.class)
@@ -34,7 +52,7 @@ public class CSVFileManager {
 
     CSVFormat csvFormat = CSVFormat.Builder.create()
         .setHeader(getHeaders(classe))
-        .setSkipHeaderRecord(true)
+        .setSkipHeaderRecord(saltaHeader)
         .build();
 
     try (FileReader reader = new FileReader(filePath);
@@ -111,6 +129,8 @@ public class CSVFileManager {
       if (recordErrorCount > 0)
         Feedback.err(recordErrorCount + " record non definiti correttamente in \"" + filePath + "\"");
 
+    } catch (FileNotFoundException e) {
+      Feedback.warn("File dati non esistente, aggiungere informazioni per\n rendere il sistema funzionante (tramite registrazione o inserimenti)");
     } catch (IOException | RuntimeException e) {
       Feedback.err(e.getMessage());
       Feedback.err(Arrays.toString(e.getStackTrace()));
