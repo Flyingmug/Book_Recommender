@@ -24,4 +24,5 @@ public class MenuLoginView {
 
     return new Utente("","","","", userId, password);
   }
+
 }

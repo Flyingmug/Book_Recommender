@@ -40,8 +40,8 @@ public class MenuLibreriePersonali {
     System.out.println(rs+"╚\n");
 
     // computazione iterazione seguente
-    System.out.println(" ["+gr+"E"+rs+"]sci, ["+pr+"N"+rs+"]uova, ["+pr+"C"+rs+"]ancella,\n ["+gr+"A"+rs+"]vanti, ["+gr+"I"+rs+"]ndietro," +
-        " numero di ["+gr+"P"+rs+"]agina\n oppure "+gr+"indice"+rs+" della libreria per visualizzarla");
+    System.out.println(" ["+gr+"E"+rs+"]sci, ["+pr+"N"+rs+"]uova, ["+pr+"C"+rs+"]ancella\n"+
+        " oppure "+gr+"indice"+rs+" della libreria per visualizzarla");
     System.out.print(" >> ");
     return scanner.nextLine();
   }

@@ -3,6 +3,7 @@ package view;
 import Utilities.ColoriConsole;
 import model.CriterioRicerca;
 import model.Libro;
+import model.ModalitaAccesso;
 
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +33,7 @@ public class MenuPaginamentoRisultatiView {
    * @param dim_pagina int
    * @param criterio CriterioRicerca
    * @return String display*/
-  public static String display(List<Libro> paginaRisultati, int indicePaginaCorrente, int numOccorrenze, int numeroPagine, int dim_pagina, CriterioRicerca criterio, String titolo) {
+  public static String display(List<Libro> paginaRisultati, int indicePaginaCorrente, int numOccorrenze, int numeroPagine, int dim_pagina, CriterioRicerca criterio, String titolo, ModalitaAccesso modalita) {
 
     int cifreNumOcc = String.valueOf(numOccorrenze).length();
     int min_header_size = 37;
@@ -65,8 +66,16 @@ public class MenuPaginamentoRisultatiView {
     System.out.println(rs+"╚\n");
 
     // computazione iterazione seguente
-    System.out.println(" ["+gr+"E"+rs+"]sci, ["+bl+"C"+rs+"]erca\n ["+gr+"A"+rs+"]vanti, ["+gr+"I"+rs+"]ndietro," +
-            " numero di ["+gr+"P"+rs+"]agina\n oppure "+gr+"indice"+rs+" del libro per visualizzarlo");
+    System.out.print(" ["+gr+"E"+rs+"]sci ");
+    boolean b = modalita.equals(ModalitaAccesso.LIMITED_SELECTING) || modalita.equals(ModalitaAccesso.SELECTING);
+    if (b)
+      System.out.print("e conferma, ");
+    System.out.print("["+bl+"C"+rs+"]erca\n ["+gr+"A"+rs+"]vanti, ["+gr+"I"+rs+"]ndietro," +
+            " numero di ["+gr+"P"+rs+"]agina\n oppure "+gr+"indice"+rs+" del libro per ");
+    if (b)
+      System.out.print("visualizzarlo");
+    else
+      System.out.print("selezionarlo");
     System.out.print(" >> ");
     return scanner.nextLine();
   }

@@ -43,7 +43,7 @@ public class Valutazione {
     this.gradevolezza = gradevolezza;
     this.originalita = originalita;
     this.edizione = edizione;
-    this.recensione = recensione;
+    setRecensione(recensione);
   }
 
   /**
@@ -96,6 +96,8 @@ public class Valutazione {
   public void setRecensione(String recensione) {
     if (recensione.length() > 256) {
       this.recensione = recensione.substring(0, 255);
+    } else {
+      this.recensione = recensione;
     }
   }
   /**

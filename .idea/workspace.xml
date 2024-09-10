@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="fixed search bug">
+    <list default="true" id="b269c5b6-d887-46b1-a10d-1358de289da1" name="Changes" comment="small fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Librerie.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/Librerie.dati.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/UtentiRegistrati.dati.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/ValutazioniLibri.dati.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/ValutazioniLibri.dati.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Valutazione.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Valutazione.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MenuLibreriePersonali.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuLibreriePersonali.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MenuLoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuLoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuPaginamentoRisultatiView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MenuRegistrazioneView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuRegistrazioneView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MenuValutazioneView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuValutazioneView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725992101750</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="small fixes">
+      <option name="closed" value="true" />
+      <created>1725994736973</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1725994736973</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -229,7 +244,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="small fixes" />
     <MESSAGE value="fixed ClassCastException in &quot;iniziaRicerca(...)&quot; from type casting" />
     <MESSAGE value="lettura file" />
     <MESSAGE value="Login" />
@@ -244,17 +258,7 @@
     <MESSAGE value="commits on CSVFileManager" />
     <MESSAGE value="commits on model" />
     <MESSAGE value="fixed search bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed search bug" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controller/Controller.java</url>
-          <line>116</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="small fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="small fixes" />
   </component>
 </project>

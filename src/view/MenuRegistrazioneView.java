@@ -25,30 +25,30 @@ public class MenuRegistrazioneView {
 
     System.out.println("╔ Inserire "+bb+"."+rs+" per uscire\n║");
     System.out.print("╔ Nome: ");
-    String nome = leggiValidaInput();
+    String nome = leggiValidaInput(false);
     if (nome == null) return null;
 
     System.out.print("╠ Cognome: ");
-    String cognome = leggiValidaInput();
+    String cognome = leggiValidaInput(false);
     if (cognome == null) return null;
 
     System.out.print("╠ Codice Fiscale: ");
-    String codFiscale = leggiValidaInput();
+    String codFiscale = leggiValidaInput(true);
     if (!Utils.verCodiceFiscale(codFiscale) && !(codFiscale == null) && !codFiscale.equals("w")) {
-      System.out.println("Codice Fiscale non valido.");
+      System.out.println("--Codice Fiscale non valido--");
       return null; // Return null if the Codice Fiscale is not valid
     }
 
     System.out.print("╠ Email: ");
-    String email = leggiValidaInput();
+    String email = leggiValidaInput(true);
     if (email == null) return null;
 
     System.out.print("╠ User Id: ");
-    String userId = leggiValidaInput();
+    String userId = leggiValidaInput(true);
     if (userId == null) return null;
 
     System.out.print("╚ Password: ");
-    String password = leggiValidaInput();
+    String password = leggiValidaInput(true);
     if (password == null) return null;
 
     return new Utente(nome, cognome, codFiscale, email, userId, password);
@@ -57,9 +57,10 @@ public class MenuRegistrazioneView {
   /**
    * Pone l'utente in un ciclo il quale vieta l'uscita fino all'inserimento
    * di un valore valido o un carattere di uscita prestabilito.
+   * @param noSpace spazi accettati o meno
    * @return input utente validato
    */
-  private static String leggiValidaInput() {
+  private static String leggiValidaInput(boolean noSpace) {
     while (true) {
       String input = scanner.nextLine().trim();
 
@@ -69,13 +70,16 @@ public class MenuRegistrazioneView {
       }
 
       if (input.isBlank()) {
-        System.out.println("Input cannot be blank. Please enter a valid value:");
+        System.out.println("--L'input non può essere vuoto--");
+      } else if(noSpace && input.contains(" ")) {
+        System.out.println("--Spazi non ammessi--");
       } else {
         // Normalizza gli spazi tra parole (sostituisce i doppi con singoli)
         return input.replaceAll("\\s+", " ");
       }
     }
   }
+
 }
 
 

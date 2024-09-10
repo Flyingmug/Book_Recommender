@@ -162,7 +162,7 @@ public class Controller {
     do {
       List<Libro> paginaRisultati = Utils.listSection(risultati, indicePaginaCorrente*DIM_PAGINA, DIM_PAGINA);
 
-      sceltaOpzionePagina = MenuPaginamentoRisultatiView.display(paginaRisultati, indicePaginaCorrente, numOccorrenze, numeroPagine, DIM_PAGINA, criterio, titoloPagina);
+      sceltaOpzionePagina = MenuPaginamentoRisultatiView.display(paginaRisultati, indicePaginaCorrente, numOccorrenze, numeroPagine, DIM_PAGINA, criterio, titoloPagina, modalita);
 
 
         // verifica opzione selezionata
@@ -201,18 +201,28 @@ public class Controller {
 
             // aggiunta di libri alla libreria
              if (Utils.isInteger(sceltaOpzionePagina)) {
-              // visualizzazione dati di un libro
-              int indice = Integer.parseInt(sceltaOpzionePagina);
-              if (modalita == ModalitaAccesso.SELECTING || modalita == ModalitaAccesso.LIMITED_SELECTING) {
-                libriSelezionati.add(risultati.get(indice));
-                Feedback.info("Libro selezionato");
+              int indice = Integer.parseInt(sceltaOpzionePagina) - 1;
 
-                if (modalita == ModalitaAccesso.LIMITED_SELECTING && libriSelezionati.size() == 3) {
-                  Feedback.info("3 libri selezionati");
-                  return false;
-                }
-              } else if (indice > 0 && indice <= numOccorrenze) {
-                visualizzaLibro(risultati.get(indice-1), modalita);
+              if(indice >= 0 && indice < numOccorrenze) {
+                // controllo modalita' di interpretazione dell' indice
+                if (modalita == ModalitaAccesso.SELECTING || modalita == ModalitaAccesso.LIMITED_SELECTING) {
+
+                  Libro libScelto = risultati.get(indice);
+
+                  if (!libriSelezionati.contains(libScelto)) {
+                    libriSelezionati.add(risultati.get(indice));
+                    Feedback.info("Libro selezionato");
+
+                    // controllo limite di input per la selezione dei consigli
+                    if (modalita == ModalitaAccesso.LIMITED_SELECTING && libriSelezionati.size() == 3) {
+                      Feedback.info("3 libri selezionati");
+                      return false;
+                    }
+                  } else
+                    Feedback.warn("Il libro è già stato scelto");
+                } else
+                  // visualizzazione dati di un libro
+                  visualizzaLibro(risultati.get(indice), modalita);
               } else
                 Feedback.warn("Indice selezionato non valido");
             } else
@@ -231,12 +241,16 @@ public class Controller {
    * @param l Libro*/
   void visualizzaLibro(Libro l, ModalitaAccesso modalita) {
 
-    Valutazione valMedia = valutazioni.valutazioneMedia(l);
+    GestoreValutazioni valutazioniLibro;
 
     boolean uscitaPaginaLibro = false;
     do {
 
-      String scelta = DisplayLibroView.display(l, valMedia, valutazioni.count(),  modalita);
+      // operazioni inserite nel ciclo per verificare eventuali modifiche
+      valutazioniLibro = new GestoreValutazioni(valutazioni.cercaValutazioni(l));
+      Valutazione valMedia = valutazioniLibro.valutazioneMedia(l);
+
+      String scelta = DisplayLibroView.display(l, valMedia, valutazioniLibro.count(),  modalita);
       switch (scelta.toLowerCase()) {
         case "s":
           if (modalita.equals(ModalitaAccesso.OPERATING)) {
@@ -364,6 +378,7 @@ public class Controller {
           break;
         case "e":
           uscitaRecensioni = true;
+          break;
         default:
           Feedback.warn("Opzione inesistente");
           break;
@@ -397,14 +412,19 @@ public class Controller {
         case "n":
           // nuova libreria
           Libreria lib = MenuLibreriePersonali.displayCreazione();
-          if (!libreriePersonali.getLibrerie().contains(lib)) {
 
+          if (!libreriePersonali.getLibrerie().contains(lib)) {
             Feedback.info("Seleziona i libri da aggiungere alla libreria");
             List<Libro> selezioni = iniziaRicerca(raccolta, ModalitaAccesso.SELECTING, null, "Seleziona libri");
-            lib.aggiungiListaLibri(selezioni);
-            libreriePersonali.registraLibreria(lib, idUtenteCorrente);
-            numOccorrenze++;
-            Feedback.success("Libreria creata.");
+
+            if (!selezioni.isEmpty()) {
+              lib.aggiungiListaLibri(selezioni);
+              libreriePersonali.registraLibreria(lib, idUtenteCorrente);
+              numOccorrenze++;
+              Feedback.success("Libreria creata.");
+            } else
+              Feedback.warn("Nessun libro selezionato, creazione della libreria annullata");
+
           } else
             Feedback.warn("La libreria " + lib.getNomeLibreria() + " è già presente");
           break;
@@ -412,13 +432,16 @@ public class Controller {
         case "r":
           // rimuovi libreria
           String indiceEliminazione = MenuLibreriePersonali.displayEliminazione();
+
           if (Utils.isInteger(indiceEliminazione)) {
-            // visualizzazione dati di un libro
+            // Elimina libreria
             int indice = Integer.parseInt(indiceEliminazione);
+
             if (indice > 0 && indice <= numOccorrenze) {
               libreriePersonali.elimina(--indice, idUtenteCorrente);
               numOccorrenze--;
               Feedback.success("Libreria eliminata");
+
             } else
               Feedback.warn("Indice selezionato non valido");
           } else
@@ -430,8 +453,10 @@ public class Controller {
 
         default:
           if (Utils.isInteger(sceltaOperazioneLibreria)) {
+
             // visualizzazione dati di un libro
             int indice = Integer.parseInt(sceltaOperazioneLibreria);
+
             if (indice > 0 && indice <= numOccorrenze) {
               visualizzaLibreria(libreriePersonali.getLibrerie().get(indice-1));
             } else
