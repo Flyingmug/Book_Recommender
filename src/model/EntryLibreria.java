@@ -2,6 +2,8 @@ package model;
 
 /**
  * Classe che mette in relazione i libri, gli utenti, e le librerie
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
  */
 public class EntryLibreria {
 

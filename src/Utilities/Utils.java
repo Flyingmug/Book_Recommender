@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * Classe contenente metodi generici con vari campi di utilizzo
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
  */
 public class Utils {
   private static final String INTEGER_REGEX = "^-?\\d+$"; // Match per gli interi

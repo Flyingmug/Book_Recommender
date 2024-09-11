@@ -2,6 +2,8 @@ package Utilities;
 
 /**
  * CLasse utilizzata per fornire messaggi di errore/avviso/informazione
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
  */
 public class Feedback {
 

@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
+/**
+ * Menu di gestione delle librerie di un utente
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
+ */
 public class MenuLibreriePersonali {
 
   final static String rs = ColoriConsole.RESET;

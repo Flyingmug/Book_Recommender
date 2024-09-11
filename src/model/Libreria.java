@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * Rappresenta una libreria con i rispettivi metodi di aggiunta
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
  */
 public class Libreria {
 

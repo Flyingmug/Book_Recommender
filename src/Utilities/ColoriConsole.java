@@ -2,6 +2,8 @@ package Utilities;
 
 /**
  * Classe utilizzata per avere a disposizione un elenco di colori
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
  */
 public class ColoriConsole {
     // Reset

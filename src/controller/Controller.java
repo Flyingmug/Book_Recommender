@@ -49,9 +49,6 @@ public class Controller {
   * Gestisce il ciclo di vita del sistema.
   * Preso un input, richiama il metodo che gestisce l'operazione corrispondente.*/
   public void iniziaCicloPrincipale() {
-    // costanti -> NOTA: la dimensione deve essere maggiore di 0
-
-    // variabili per il funzionamento del ciclo
     String scelta;
     boolean uscita = false;
 
@@ -59,7 +56,6 @@ public class Controller {
 
       boolean accessoEseguito = sessione.getUtenteCorrente() != null;
 
-      // DISPLAY deve avere nella descrizione del funzionamento indicata la restituzione della scelta fatta dall'utente
       scelta = accessoEseguito ?
           MenuPrincipaleView.displayFull() :
           MenuPrincipaleView.displayMinimal();

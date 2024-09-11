@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 /**
  * Classe View utilizzata per stampare a video la finestra di login
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
  */
 public class MenuLoginView {
 

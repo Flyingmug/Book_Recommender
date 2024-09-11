@@ -7,6 +7,10 @@ import model.Valutazione;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
+ */
 public class MenuRecensioniView {
 
   final static String indicatore = "★";

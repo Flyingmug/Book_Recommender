@@ -2,6 +2,8 @@ package model;
 
 /**
  * Classe rappresentante i consigli di lettura di un utente per un libro
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
  */
 public class ConsiglioLettura {
   String idLibro;

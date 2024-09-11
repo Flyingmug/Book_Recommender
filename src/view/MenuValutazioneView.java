@@ -6,6 +6,11 @@ import model.Valutazione;
 
 import java.util.Scanner;
 
+/**
+ * Menu di inserimento di una valutazione con relativa recensione opzionale
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
+ */
 public class MenuValutazioneView {
 
   final static String bb = ColoriConsole.BLUE_BOLD;

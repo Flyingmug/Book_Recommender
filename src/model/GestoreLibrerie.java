@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 /**
  *  Classe responsabile della gestione delle librerie
+ *  @author Selimi Sebian
+ *  @author Moscatelli Alexander
  */
 public class GestoreLibrerie {
 
@@ -64,7 +66,7 @@ public class GestoreLibrerie {
       // Crea una nuova libreria
       Libreria library = new Libreria(libraryId, libraryName);
 
-      // Add books to the library
+      // Aggiunge i libri alla libreria
       for (EntryLibreria libraryEntry : libraryEntries) {
         // Controlla se l' entry ha un idLibro valido
         String bookId = libraryEntry.getIdLibro();
@@ -75,7 +77,7 @@ public class GestoreLibrerie {
           if (book != null) {
             library.aggiungiLibro(book);
           } else {
-            System.out.println("Warning: Book with ID " + bookId + " not found in the total collection.");
+            System.out.println("Attenzione: Libro con id: " + bookId + " non trovato nella collezione.");
           }
         }
       }

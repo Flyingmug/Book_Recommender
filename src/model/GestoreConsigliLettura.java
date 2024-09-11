@@ -3,6 +3,11 @@ package model;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Classe gestore dei consigli di lettura
+ * @author Selimi Sebian
+ * @author Moscatelli Alexander
+ */
 public class GestoreConsigliLettura {
   List<ConsiglioLettura> elencoConsigli;
   String path_consigli;
@@ -10,6 +15,8 @@ public class GestoreConsigliLettura {
   /**
    * Costruttore GestoreConsigliLettura.
    * Istanzia una lista di libri vuota
+   * @author Selimi Sebian
+   * @author Moscatelli Alexander
    */
   public GestoreConsigliLettura() { elencoConsigli = new LinkedList<>(); }
 
